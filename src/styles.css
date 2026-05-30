@@ -1,0 +1,282 @@
+/* ============================================================
+   TAILWIND v4 — utilities + theme only (no Preflight reset, so the
+   already-styled base is untouched). Color/font tokens below alias
+   the design tokens, so Tailwind utilities (bg-card, text-ink,
+   border-hairline, font-mono…) are automatically theme-aware.
+============================================================ */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+@theme {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-hairline: var(--hairline);
+  --color-accent: var(--accent);
+  --color-good: var(--good);
+  --font-sans: var(--sans);
+  --font-mono: var(--mono);
+}
+
+:root {
+  --paper: #FAF8F4;
+  --paper-2: #F3F0E9;
+  --card: #FFFFFF;
+  --ink: #1A1A1A;
+  --ink-2: #4A4A4A;
+  --ink-3: #8A8A8A;
+  --ink-4: #B8B5AE;
+  --hairline: rgba(20, 20, 20, 0.10);
+  --hairline-soft: rgba(20, 20, 20, 0.06);
+  --accent: #3D3DF5;
+  --accent-2: #2929C7;
+  --accent-soft: rgba(61, 61, 245, 0.08);
+  --accent-ring: rgba(61, 61, 245, 0.28);
+  --good: #1E8E5A;
+  --shadow-card: 0 1px 0 rgba(20,20,20,0.04), 0 8px 24px -12px rgba(20,20,20,0.12);
+  --shadow-pop: 0 24px 60px -20px rgba(20,20,20,0.30), 0 2px 8px rgba(20,20,20,0.08);
+
+  --sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --serif: 'DM Sans', ui-serif, Georgia, serif;
+}
+
+html[data-theme="dark"] {
+  --paper: #0E0E10;
+  --paper-2: #15151A;
+  --card: #16161B;
+  --ink: #F2F0EA;
+  --ink-2: #C8C5BE;
+  --ink-3: #807D76;
+  --ink-4: #5A574F;
+  --hairline: rgba(255, 255, 255, 0.10);
+  --hairline-soft: rgba(255, 255, 255, 0.06);
+  --accent: #8A8AFF;
+  --accent-2: #B5B5FF;
+  --accent-soft: rgba(138, 138, 255, 0.12);
+  --accent-ring: rgba(138, 138, 255, 0.32);
+  --good: #4FD18A;
+  --shadow-card: 0 1px 0 rgba(0,0,0,0.40), 0 8px 24px -12px rgba(0,0,0,0.50);
+  --shadow-pop: 0 24px 60px -20px rgba(0,0,0,0.80), 0 2px 8px rgba(0,0,0,0.40);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  font-feature-settings: "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+
+/* ============================================================
+   DM SANS TYPE RULES
+   Display (hero h1):     600, -0.035em, 1.02
+   Section heading (h2):  600, -0.02em,  1.10
+   Card / project title:  500, -0.015em, 1.20
+   Body (paragraphs):     400, normal,   1.55
+   Lead / italic intro:   400 italic
+   Labels (mono):         500 mono uppercase 0.08em
+   Numerals tabular for stats/dates.
+============================================================ */
+h1, h2, h3, h4 { font-family: var(--sans); }
+h1 { font-weight: 600; letter-spacing: -0.035em; }
+h2 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+h3 { font-weight: 500; letter-spacing: -0.015em; }
+.stat-num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+::selection { background: var(--accent); color: #fff; }
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+
+/* focus */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* shared utilities used by app.jsx */
+.mono { font-family: var(--mono); font-feature-settings: "ss01"; }
+.serif { font-family: var(--serif); }
+.hairline { border-color: var(--hairline); }
+
+/* command palette key chip */
+.kbd {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1;
+  padding: 4px 6px 4px 6px;
+  border: 1px solid var(--hairline);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: var(--card);
+  color: var(--ink-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+/* underline-grow link */
+.link-grow {
+  position: relative;
+  display: inline-block;
+}
+.link-grow::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 320ms cubic-bezier(.2,.7,.2,1);
+}
+.link-grow:hover::after { transform: scaleX(1); }
+
+/* caret blink */
+@keyframes blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0; } }
+.caret { display: inline-block; width: 0.06em; background: currentColor; height: 0.95em; margin-left: 0.06em; vertical-align: -0.10em; animation: blink 1.05s steps(1) infinite; border-radius: 1px; }
+
+/* fade-up on mount */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.fade-up { animation: fadeUp 700ms cubic-bezier(.2,.7,.2,1) both; }
+
+/* palette backdrop */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn  { from { opacity: 0; transform: translateY(-8px) scale(.985); } to { opacity: 1; transform: none; } }
+
+/* card lift — snappy, immediate per-block hover feedback */
+.card-lift {
+  transition: transform 110ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 110ms cubic-bezier(.2,.7,.2,1),
+              border-color 110ms cubic-bezier(.2,.7,.2,1),
+              background-color 110ms ease;
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
+  border-color: var(--accent);
+}
+
+.accent-fade-target { transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, transform 220ms ease; }
+
+/* primary CTA — bordered, fills with accent on hover */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 22px;
+  background: var(--card);
+  color: var(--ink);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(20, 20, 20, 0.04);
+  transition: background-color 120ms ease, color 120ms ease,
+              transform 120ms cubic-bezier(.2,.7,.2,1), box-shadow 120ms ease;
+}
+.btn-cta:hover {
+  background: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+.btn-cta .cta-arrow { transition: transform 120ms ease; }
+.btn-cta:hover .cta-arrow { transform: translateX(3px); }
+
+/* hide scrollbar in palette list while keeping scroll */
+.scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: var(--hairline); border-radius: 999px; }
+.scroll-thin::-webkit-scrollbar-track { background: transparent; }
+
+/* section anchor offset so smooth-scroll lands below the top nav */
+.anchor { scroll-margin-top: 96px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html { scroll-behavior: auto; }
+  /* never leave reveal content stuck hidden when motion is disabled */
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ============================================================
+   POLISH — scroll reveal + extra hover affordances
+   (flex/gap/positioning utilities now come from Tailwind)
+============================================================ */
+
+/* sections fade + slide up as they enter the viewport */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Exploring cells — give the only non-interactive blocks a hover */
+.explore-cell {
+  background: var(--paper);
+  transition: background-color .12s ease, border-color .12s ease;
+}
+.explore-cell:hover {
+  background: var(--card);
+  border-color: var(--accent);
+}
+
+/* Writing card "read →" arrow nudge */
+.read-arrow { transition: transform .12s ease; }
+a:hover .read-arrow { transform: translateX(3px); }
+
+/* small ghost button for the hero contact row (Nithin-style) */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 13px;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  color: var(--ink-2);
+  font-size: 13px;
+  background: var(--card);
+  transition: border-color .12s ease, color .12s ease, background-color .12s ease;
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--ink); }
+
+/* ============================================================
+   MOBILE PASS — single breakpoint, override classes win over
+   inline styles via !important. Sprinkle these onto the right
+   elements to collapse desktop grids on phones.
+============================================================ */
+@media (max-width: 760px) {
+  .m-stack-1 { grid-template-columns: 1fr !important; gap: 22px !important; }
+  .m-stack-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; }
+  .m-stack-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; }
+  .m-pad-x      { padding-left: 18px !important; padding-right: 18px !important; }
+  .m-pad-y-56   { padding-top: 56px !important; padding-bottom: 56px !important; }
+  .m-pad-y-hero { padding-top: 88px !important; padding-bottom: 56px !important; }
+  .m-flex-col   { flex-direction: column !important; align-items: flex-start !important; gap: 14px !important; }
+  .m-hide       { display: none !important; }
+  .m-frame-tight{ padding: 12px !important; }
+}
