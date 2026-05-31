@@ -94,6 +94,11 @@ const EXPERIENCE = [
     role: "Product Management Intern",
     dates: "Aug 2025 — Present",
     note: "Joined as Finrep's first PM intern; helped scale $0→$100K ARR in 9 months. Owns analytics across 7 modules and ships features end-to-end.",
+    bullets: [
+      "Joined as the first PM intern; helped scale Finrep from $0 → $100K ARR in 9 months across the CFO-office product.",
+      "Stood up Mixpanel + Metabase across 7 surfaces; built Claude-skill automations that cut weekly user analytics from 4–6 hrs to 1–2.",
+      "Shipped the ASC Codification Library end-to-end — a searchable in-product reference for 35,000+ FASB standards that let a key customer migrate fully off Intelligize/LexisNexis.",
+    ],
   },
   {
     company: "Tryo",
@@ -101,6 +106,11 @@ const EXPERIENCE = [
     role: "Founder's Office Intern",
     dates: "May — Jul 2025",
     note: "Partnered with 8+ fast-fashion brands (Souled Store, Bear House, Bewakoof, Burger Bae). Drove daily-order growth via a Swish × Blinkit pamphlet GTM (−40% CAC) and referral screens (+10% referred customers).",
+    bullets: [
+      "Ran 20+ customer calls with apparel D2C brands (Souled Store, Bewakoof, Burger Bae); findings shaped Tryo's supplier roadmap.",
+      "Drove a 40% CAC reduction by partnering with Swish & Blinkit on offline distribution — owned the GTM end-to-end.",
+      "Designed referral screens that drove 10% retention; ran dark-store ops by setting up SOPs for inventory and fulfilment.",
+    ],
   },
 ];
 
@@ -111,6 +121,11 @@ const EDUCATION = [
     role: "Integrated M.Tech, Geological Technology",
     dates: "2023 — 2028",
     note: "Roorkee, India.",
+    bullets: [
+      "Tech GC 2026 — secured #1 with a dual-layer DBSCAN geo-blocking pipeline projecting INR 18.1L annual savings for COOX.",
+      "Head of PR, Hi-Res · E-Summit 2025 — reached 10K+ students and secured 14+ industry speakers (Adobe, Zomato, IBM).",
+      "Co-founded Swaps, a college-merch brand that crossed INR 1L+ revenue in 6 months across IIT campuses.",
+    ],
   },
 ];
 
@@ -348,6 +363,11 @@ const Icon = {
   send: (p) => (
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}>
       <path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" />
+    </svg>
+  ),
+  chevron: (p) => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="m6 9 6 6 6-6" />
     </svg>
   ),
 };
@@ -897,36 +917,116 @@ function Projects({ onOpenCase }) {
    EXPERIENCE
 ============================================================ */
 
+function useIsTouchDevice() {
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(hover: none)");
+    setIsTouch(mq.matches);
+    const handler = (e) => setIsTouch(e.matches);
+    mq.addEventListener ? mq.addEventListener("change", handler) : mq.addListener(handler);
+    return () => {
+      mq.removeEventListener ? mq.removeEventListener("change", handler) : mq.removeListener(handler);
+    };
+  }, []);
+  return isTouch;
+}
+
+function TimelineItem({ item, index, total, forceOpen }) {
+  const [hovered, setHovered] = useState(false);
+  const hasBullets = Array.isArray(item.bullets) && item.bullets.length > 0;
+  const open = hasBullets && (forceOpen || hovered);
+
+  return (
+    <li
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      className="card-lift m-stack-1"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "120px 1fr auto",
+        gap: 24,
+        padding: "22px 4px",
+        borderTop: "1px solid var(--hairline)",
+        borderBottom: index === total - 1 ? "1px solid var(--hairline)" : "none",
+        alignItems: "baseline",
+      }}
+    >
+      <div className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>{item.dates}</div>
+      <div>
+        <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
+          {item.href ? (
+            <a href={item.href} target="_blank" rel="noopener" className="link-grow"
+              style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em", color: "var(--accent)" }}>
+              {item.company}
+            </a>
+          ) : (
+            <span style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em" }}>{item.company}</span>
+          )}
+        </div>
+        <div style={{ color: "var(--ink-2)", marginTop: 4, fontSize: 14 }}>{item.role}</div>
+        {item.note && !hasBullets && <div style={{ color: "var(--ink-3)", marginTop: 6, fontSize: 13 }}>{item.note}</div>}
+        {hasBullets && (
+          <div style={{
+            display: "grid",
+            gridTemplateRows: open ? "1fr" : "0fr",
+            transition: "grid-template-rows 240ms ease, margin-top 240ms ease",
+            marginTop: open ? 12 : 0,
+            overflow: "hidden",
+          }}>
+            <ul style={{
+              minHeight: 0,
+              listStyle: "none",
+              padding: 0,
+              margin: 0,
+              display: "grid",
+              gap: 8,
+            }}>
+              {item.bullets.map((b, j) => (
+                <li key={j} style={{
+                  position: "relative",
+                  paddingLeft: 14,
+                  color: "var(--ink-2)",
+                  fontSize: 13.5,
+                  lineHeight: 1.55,
+                }}>
+                  <span aria-hidden style={{
+                    position: "absolute", left: 0, top: "0.55em",
+                    width: 5, height: 5, borderRadius: "50%",
+                    background: "var(--ink-4)",
+                  }} />
+                  {b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      <div className="flex items-center" style={{ gap: 10 }}>
+        <span className="mono m-hide" style={{ color: "var(--ink-4)", fontSize: 11 }}>{String(index + 1).padStart(2, "0")}</span>
+        {hasBullets && !forceOpen && (
+          <span aria-hidden style={{
+            color: "var(--ink-3)",
+            display: "inline-flex",
+            transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            transition: "transform 180ms ease",
+          }}>
+            <Icon.chevron />
+          </span>
+        )}
+      </div>
+    </li>
+  );
+}
+
 function TimelineList({ items }) {
+  const isTouch = useIsTouchDevice();
   return (
     <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
       {items.map((e, i) => (
-        <li key={i} className="card-lift m-stack-1" style={{
-          display: "grid",
-          gridTemplateColumns: "120px 1fr auto",
-          gap: 24,
-          padding: "22px 4px",
-          borderTop: "1px solid var(--hairline)",
-          borderBottom: i === items.length - 1 ? "1px solid var(--hairline)" : "none",
-          alignItems: "baseline",
-        }}>
-          <div className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>{e.dates}</div>
-          <div>
-            <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
-              {e.href ? (
-                <a href={e.href} target="_blank" rel="noopener" className="link-grow"
-                  style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em", color: "var(--accent)" }}>
-                  {e.company}
-                </a>
-              ) : (
-                <span style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em" }}>{e.company}</span>
-              )}
-            </div>
-            <div style={{ color: "var(--ink-2)", marginTop: 4, fontSize: 14 }}>{e.role}</div>
-            {e.note && <div style={{ color: "var(--ink-3)", marginTop: 6, fontSize: 13 }}>{e.note}</div>}
-          </div>
-          <span className="mono m-hide" style={{ color: "var(--ink-4)", fontSize: 11 }}>{String(i + 1).padStart(2, "0")}</span>
-        </li>
+        <TimelineItem key={i} item={e} index={i} total={items.length} forceOpen={isTouch} />
       ))}
     </ol>
   );
