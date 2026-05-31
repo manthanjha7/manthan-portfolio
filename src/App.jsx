@@ -949,7 +949,7 @@ function TimelineItem({ item, index, total, forceOpen }) {
         gridTemplateColumns: "120px 1fr auto",
         gap: 24,
         padding: "22px 4px",
-        borderTop: "1px solid var(--hairline)",
+        borderTop: index === 0 ? "none" : "1px solid var(--hairline)",
         borderBottom: index === total - 1 ? "1px solid var(--hairline)" : "none",
         alignItems: "baseline",
       }}
@@ -1062,7 +1062,7 @@ function Achievements() {
         {ACHIEVEMENTS.map((a, i) => (
           <li key={i} className="card-lift" style={{
             padding: "20px 4px",
-            borderTop: "1px solid var(--hairline)",
+            borderTop: i === 0 ? "none" : "1px solid var(--hairline)",
             borderBottom: i === ACHIEVEMENTS.length - 1 ? "1px solid var(--hairline)" : "none",
           }}>
             <div className="flex items-baseline justify-between" style={{ gap: 12, flexWrap: "wrap" }}>
