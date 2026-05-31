@@ -250,9 +250,24 @@ const PROJECTS = [
    BLOCK COMPONENTS
 ============================================================ */
 
-function CSImage({ label, aspect = "16/10", caption, frame = true, style = {} }) {
-  // soft mat + placeholder
-  const inner = (
+function CSImage({ label, aspect = "16/10", caption, frame = true, src, style = {} }) {
+  // If a real image src is provided, render it directly inside the frame at
+  // its natural aspect ratio. No forced aspectRatio container, no extra
+  // padding mat - that just stacks empty space around the image.
+  const inner = src ? (
+    <img
+      src={src}
+      alt={label || caption || "lesson illustration"}
+      loading="lazy"
+      style={{
+        display: "block",
+        width: "100%",
+        height: "auto",
+        borderRadius: 8,
+        ...style,
+      }}
+    />
+  ) : (
     <div style={{
       width: "100%",
       aspectRatio: aspect,
@@ -520,14 +535,129 @@ function CSTestimonial({ quote, name, role }) {
    BLOCK RENDERER
 ============================================================ */
 
+function CSVideo({ youtubeId, src, title, caption, aspect = "16/9" }) {
+  const embedSrc = src || (youtubeId ? `https://www.youtube.com/embed/${youtubeId}` : null);
+  return (
+    <figure style={{ margin: 0 }}>
+      <div className="m-frame-tight" style={csImageFrame}>
+        <div style={{
+          width: "100%",
+          aspectRatio: aspect,
+          borderRadius: 10,
+          overflow: "hidden",
+          background: csCard,
+          border: "1px solid " + csHair,
+          position: "relative",
+        }}>
+          {embedSrc && (
+            <iframe
+              src={embedSrc}
+              title={title || "Video"}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              style={{
+                position: "absolute", inset: 0,
+                width: "100%", height: "100%",
+                border: "none", display: "block",
+              }}
+            />
+          )}
+        </div>
+      </div>
+      {caption && (
+        <figcaption style={{
+          marginTop: 12, fontSize: 13, color: csInk3, lineHeight: 1.55,
+        }}>{caption}</figcaption>
+      )}
+    </figure>
+  );
+}
+
+function CSCode({ code, lang, caption }) {
+  return (
+    <figure style={{ margin: 0 }}>
+      <pre className="scroll-thin" style={{
+        margin: 0,
+        padding: "16px 18px",
+        background: "color-mix(in oklab, var(--ink) 92%, var(--paper))",
+        color: "color-mix(in oklab, var(--paper) 92%, var(--ink))",
+        border: "1px solid " + csHair,
+        borderRadius: 10,
+        fontFamily: "var(--mono)",
+        fontSize: 13,
+        lineHeight: 1.6,
+        overflowX: "auto",
+        whiteSpace: "pre",
+      }}>
+        {lang && (
+          <div className="mono" style={{
+            fontSize: 10.5, color: "color-mix(in oklab, var(--paper) 55%, var(--ink))",
+            letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 8,
+          }}>{lang}</div>
+        )}
+        <code>{code}</code>
+      </pre>
+      {caption && (
+        <figcaption className="mono" style={{ marginTop: 8, fontSize: 11.5, color: csInk3, letterSpacing: "0.02em" }}>
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+function CSTable({ headers, rows }) {
+  return (
+    <div className="scroll-thin" style={{ overflowX: "auto" }}>
+      <table style={{
+        width: "100%", borderCollapse: "collapse",
+        fontSize: 14, lineHeight: 1.55, color: csInk,
+        border: "1px solid " + csHair, borderRadius: 10, overflow: "hidden",
+      }}>
+        {headers && (
+          <thead>
+            <tr>
+              {headers.map((h, i) => (
+                <th key={i} style={{
+                  textAlign: "left", padding: "12px 14px",
+                  background: csPaper2,
+                  borderBottom: "1px solid " + csHair,
+                  fontWeight: 600, fontSize: 13, letterSpacing: "-0.005em",
+                }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+        )}
+        <tbody>
+          {rows.map((row, r) => (
+            <tr key={r}>
+              {row.map((cell, c) => (
+                <td key={c} style={{
+                  padding: "12px 14px",
+                  borderBottom: r === rows.length - 1 ? "none" : "1px solid " + csHair,
+                  borderRight: c === row.length - 1 ? "none" : "1px solid " + csHair,
+                  color: c === 0 ? csInk : csInk2,
+                  fontWeight: c === 0 ? 500 : 400,
+                  verticalAlign: "top",
+                }}>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function renderBlock(b, i) {
   switch (b.type) {
-    case "hero":        return <CSImage key={i} label={b.label} aspect={b.aspect || "16/10"} frame caption={b.caption} />;
+    case "hero":        return <CSImage key={i} label={b.label} aspect={b.aspect || "16/10"} frame caption={b.caption} src={b.src} />;
     case "title":       return <h1 key={i} style={{ margin: 0, fontSize: "clamp(40px, 5.4vw, 64px)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.05 }}>{b.text}</h1>;
     case "meta":        return <CSMeta key={i} {...b} />;
     case "heading":     return <CSHeading key={i} text={b.text} />;
     case "body":        return <CSBody key={i} text={b.text} texts={b.texts} />;
-    case "image":       return <CSImage key={i} label={b.label} aspect={b.aspect} caption={b.caption} frame={b.frame !== false} />;
+    case "image":       return <CSImage key={i} label={b.label} aspect={b.aspect} caption={b.caption} frame={b.frame !== false} src={b.src} />;
     case "imageGrid":   return <CSImageGrid key={i} items={b.items} cols={b.cols} />;
     case "cards3":      return <CSCards3 key={i} items={b.items} />;
     case "flow":        return <CSFlow key={i} steps={b.steps} />;
@@ -535,6 +665,9 @@ function renderBlock(b, i) {
     case "quote":       return <CSQuote key={i} text={b.text} />;
     case "impact":      return <CSImpact key={i} items={b.items} />;
     case "testimonial": return <CSTestimonial key={i} {...b} />;
+    case "code":        return <CSCode key={i} code={b.code} lang={b.lang} caption={b.caption} />;
+    case "video":       return <CSVideo key={i} youtubeId={b.youtubeId} src={b.src} title={b.title} caption={b.caption} aspect={b.aspect} />;
+    case "table":       return <CSTable key={i} headers={b.headers} rows={b.rows} />;
     case "spacer":      return <div key={i} style={{ height: b.h || 32 }} />;
     default:            return null;
   }
