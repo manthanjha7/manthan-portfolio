@@ -32,21 +32,8 @@ Push this folder to a GitHub repo, then "Add New… → Project" in the Vercel d
 
 ## Editing content
 
-All copy lives in two files:
+All copy lives in three files:
 
-- **`src/App.jsx`** — top constants: `HEADLINE`, `SUBHEAD`, `CREDENTIALS`, `ABOUT_INFO`, `MILESTONES`, `EXPERIENCE`, `WRITING`, `EXPLORING`, `SOCIALS`, and the `GH_*` GitHub stats.
-- **`src/caseStudies.jsx`** — the `PROJECTS` array; each project's `caseStudy` is an ordered list of typed content blocks (hero / heading / body / image / cards3 / flow / flowCards / quote / impact / testimonial). The block types are documented at the top of the file.
-
-### `[EDIT]` markers — fill these before going public
-
-Search the source for `[EDIT]` and `[City` etc. Still to fill:
-
-- City, university, prior role (`ABOUT_INFO`, `EXPERIENCE`, `MILESTONES`)
-- Real GitHub handle + stats (`GH_HANDLE`, `GH_STATS`, `GH_TOTAL`)
-- LinkedIn / X / GitHub / résumé links (`SOCIALS`)
-- Real case-study metrics (the Fina `impact` numbers and `[X]`/`[Y]` placeholders in `caseStudies.jsx`)
-- Writing post titles (`WRITING`)
-
-### Adding a profile photo
-
-`PhotoPlaceholder` (in `App.jsx`) and `CSImage` (in `caseStudies.jsx`) render placeholder frames. To use a real image, drop the file in `src/`, `import photo from "./me.jpg"`, and render an `<img src={photo} …>` in place of the placeholder.
+- **`src/App.jsx`** — top constants: `HEADLINE`, `CREDENTIALS`, `ABOUT_INFO`, `MILESTONES`, `EXPERIENCE`, `SOCIALS`, `ACHIEVEMENTS`, plus the `GH_USERNAME` for the live contribution graph.
+- **`src/articles.jsx`** — the `ARTICLES` array (writing section). Each article has `category`, `date`, `readTime`, `dek`, and a `blocks` body using the same block vocabulary as case studies.
+- **`src/caseStudies.jsx`** — the `PROJECTS` array; each project's `caseStudy` is an ordered list of typed content blocks (hero / heading / body / image / cards3 / flow / flowCards / quote / impact / testimonial). Block types are documented at the top of the file.
