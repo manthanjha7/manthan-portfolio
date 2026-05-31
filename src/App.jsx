@@ -633,7 +633,7 @@ function Hero() {
               color: "var(--ink-2)",
             }}>
               <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, letterSpacing: "0.04em" }}>TL;DR - </span>
-              Product strategy intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) - helped scale $0 → $100K ARR in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (40% CAC reduction). 1st place at IIT Roorkee's Tech GC (~INR 18L projected savings). IIT Roorkee, Integrated M.Tech.
+              Product management intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) - helped scale $0 → $100K ARR in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (40% CAC reduction). 1st place at IIT Roorkee's Tech GC.
             </p>
           </div>
         </div>
