@@ -543,125 +543,92 @@ function Hero() {
           <span className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>{clock}</span>
         </div>
 
-        <div className="m-stack-1" style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 280px)", gap: 40 }}>
-        <div>
-        {/* Identity row: avatar + name + status */}
-        <div className="flex items-center" style={{ gap: 24, flexWrap: "wrap" }}>
+        {/* Photo + identity/actions row */}
+        <div className="m-stack-1" style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 320px) minmax(0, 1fr)",
+          gap: 32,
+          alignItems: "start",
+        }}>
           <img
             src={manthanPhoto}
             alt="Manthan Jha"
             style={{
-              width: 128, height: 128,
-              borderRadius: "50%",
+              width: "100%",
+              aspectRatio: "1 / 1",
               objectFit: "cover",
+              borderRadius: 14,
               border: "1px solid var(--hairline)",
-              flexShrink: 0,
+              display: "block",
             }}
           />
-          <div style={{ minWidth: 0 }}>
-            <h1 style={{
-              margin: 0,
-              fontSize: "clamp(32px, 4vw, 44px)",
-              fontWeight: 600,
-              letterSpacing: "-0.025em",
-              lineHeight: 1.05,
-              color: "var(--ink)",
-            }}>
-              Manthan Jha
-            </h1>
-            <div style={{ marginTop: 8, fontSize: 14, color: "var(--ink-2)" }}>
-              20, AI Product Manager, IIT Roorkee
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 20, minWidth: 0 }}>
+            <div>
+              <h1 style={{
+                margin: 0,
+                fontSize: "clamp(32px, 4vw, 48px)",
+                fontWeight: 600,
+                letterSpacing: "-0.025em",
+                lineHeight: 1.05,
+                color: "var(--ink)",
+              }}>
+                Manthan Jha
+              </h1>
+              <div style={{ marginTop: 10, fontSize: 15, color: "var(--ink-2)" }}>
+                20, AI Product Manager, IIT Roorkee
+              </div>
+            </div>
+
+            <div className="flex items-center" style={{ gap: 10, flexWrap: "wrap" }}>
+              <a
+                href="/Manthan_Jha_Resume.pdf"
+                target="_blank"
+                rel="noopener"
+                className="card-lift"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 8,
+                  padding: "10px 16px", borderRadius: 999,
+                  background: "var(--accent)", color: "white",
+                  fontSize: 13.5, fontWeight: 500, textDecoration: "none",
+                }}
+              >
+                <Icon.doc /> Resume
+              </a>
+              {heroSocials.map(s => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target={s.href.startsWith("mailto") ? "_self" : "_blank"}
+                  rel="noopener"
+                  aria-label={s.label}
+                  className="card-lift"
+                  style={{
+                    width: 36, height: 36, borderRadius: 8,
+                    display: "inline-flex", alignItems: "center", justifyContent: "center",
+                    background: "var(--card)", color: "var(--ink-2)",
+                    border: "1px solid var(--hairline)",
+                  }}
+                >
+                  <s.Icon />
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Action row */}
-        <div className="flex items-center" style={{ gap: 10, marginTop: 22, flexWrap: "wrap" }}>
-          <a
-            href="/Manthan_Jha_Resume.pdf"
-            target="_blank"
-            rel="noopener"
-            className="card-lift"
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              padding: "10px 16px", borderRadius: 999,
-              background: "var(--accent)", color: "white",
-              fontSize: 13.5, fontWeight: 500, textDecoration: "none",
-            }}
-          >
-            <Icon.doc /> Resume
-          </a>
-          {heroSocials.map(s => (
-            <a
-              key={s.label}
-              href={s.href}
-              target={s.href.startsWith("mailto") ? "_self" : "_blank"}
-              rel="noopener"
-              aria-label={s.label}
-              className="card-lift"
-              style={{
-                width: 36, height: 36, borderRadius: 8,
-                display: "inline-flex", alignItems: "center", justifyContent: "center",
-                background: "var(--card)", color: "var(--ink-2)",
-                border: "1px solid var(--hairline)",
-              }}
-            >
-              <s.Icon />
-            </a>
-          ))}
-        </div>
-
-        {/* TL;DR */}
+        {/* TL;DR — full-width below the photo+identity row */}
         <p style={{
           marginTop: 28,
           marginBottom: 0,
           fontSize: 16,
           lineHeight: 1.65,
           color: "var(--ink-2)",
-          maxWidth: 640,
+          maxWidth: 720,
         }}>
           <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, letterSpacing: "0.04em" }}>TL;DR — </span>
           Product strategy intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) — helped scale $0 → $100K ARR in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (40% CAC reduction). 1st place at IIT Roorkee's Tech GC (~INR 18L projected savings). IIT Roorkee, Integrated M.Tech.
         </p>
-        </div>
-
-        {/* Right column: On now + Exploring */}
-        <aside style={{ display: "grid", gap: 28, alignContent: "start" }}>
-          <div>
-            <div className="mono" style={{ fontSize: 11, color: "var(--ink-3)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>
-              On now
-            </div>
-            <dl style={{ margin: 0, display: "grid", gap: 14 }}>
-              {ABOUT_INFO.map(it => (
-                <div key={it.label} style={{ display: "grid", gap: 2 }}>
-                  <dt className="mono" style={{ fontSize: 11, color: "var(--ink-4)", letterSpacing: "0.04em" }}>
-                    {it.label.toUpperCase()}
-                  </dt>
-                  <dd style={{ margin: 0, fontSize: 14, color: "var(--ink)", fontWeight: 500 }}>{it.value}</dd>
-                  {it.sub && <dd style={{ margin: 0, fontSize: 12.5, color: "var(--ink-3)" }}>{it.sub}</dd>}
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          <div>
-            <div className="mono" style={{ fontSize: 11, color: "var(--ink-3)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>
-              Now exploring
-            </div>
-            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "grid", gap: 8 }}>
-              {EXPLORING.slice(0, 4).map((e, i) => (
-                <li key={i} style={{ display: "flex", alignItems: "baseline", gap: 8, fontSize: 13, color: "var(--ink-2)", lineHeight: 1.45 }}>
-                  <span aria-hidden style={{
-                    flexShrink: 0, width: 4, height: 4, borderRadius: "50%",
-                    background: "var(--accent)", marginTop: 6,
-                  }} />
-                  <span>{e.t}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </aside>
-        </div>
       </div>
     </section>
   );
