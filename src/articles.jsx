@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { renderBlock } from "./caseStudies.jsx";
+import { SERIES, SeriesCard } from "./series.jsx";
 import manthanPhoto from "./manthan.jpg";
 
 /* ============================================================
@@ -336,7 +337,7 @@ function ArticleView({ article, onClose, onOpenArticle }) {
    ARTICLES INDEX VIEW - fullscreen 3-col grid overlay
 ============================================================ */
 
-function ArticlesIndexView({ open, onClose, onOpenArticle }) {
+function ArticlesIndexView({ open, onClose, onOpenArticle, onOpenSeries }) {
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -396,6 +397,9 @@ function ArticlesIndexView({ open, onClose, onOpenArticle }) {
             gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
             gap: 16,
           }}>
+            {SERIES.map(s => (
+              <SeriesCard key={s.id} series={s} onClick={onOpenSeries} />
+            ))}
             {ARTICLES.map(a => (
               <ArticleCard key={a.id} article={a} onClick={onOpenArticle} />
             ))}
