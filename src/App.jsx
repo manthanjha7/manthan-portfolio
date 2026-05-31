@@ -948,9 +948,10 @@ function TimelineItem({ item, index, total, forceOpen }) {
         display: "grid",
         gridTemplateColumns: "120px 1fr auto",
         gap: 24,
-        padding: "22px 4px",
-        borderTop: index === 0 ? "none" : "1px solid var(--hairline)",
-        borderBottom: index === total - 1 ? "1px solid var(--hairline)" : "none",
+        padding: "22px 22px",
+        border: "1px solid var(--hairline)",
+        borderRadius: 12,
+        background: "var(--card)",
         alignItems: "baseline",
       }}
     >
@@ -1024,7 +1025,7 @@ function TimelineItem({ item, index, total, forceOpen }) {
 function TimelineList({ items }) {
   const isTouch = useIsTouchDevice();
   return (
-    <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
+    <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 14 }}>
       {items.map((e, i) => (
         <TimelineItem key={i} item={e} index={i} total={items.length} forceOpen={isTouch} />
       ))}
@@ -1058,12 +1059,13 @@ function Achievements() {
   return (
     <section id="achievements" className="anchor m-pad-y-56" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <SectionHead num="03" label="Achievements" />
-      <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
+      <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 14 }}>
         {ACHIEVEMENTS.map((a, i) => (
           <li key={i} className="card-lift" style={{
-            padding: "20px 4px",
-            borderTop: i === 0 ? "none" : "1px solid var(--hairline)",
-            borderBottom: i === ACHIEVEMENTS.length - 1 ? "1px solid var(--hairline)" : "none",
+            padding: "20px 22px",
+            border: "1px solid var(--hairline)",
+            borderRadius: 12,
+            background: "var(--card)",
           }}>
             <div className="flex items-baseline justify-between" style={{ gap: 12, flexWrap: "wrap" }}>
               <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
