@@ -531,7 +531,12 @@ function Hero() {
   ];
   return (
     <section id="hero" className="anchor m-pad-y-hero" style={{ paddingTop: 120, paddingBottom: 100 }}>
-      <div className="fade-up" style={{ maxWidth: 720 }}>
+      <div className="fade-up" style={{
+        border: "1px solid var(--hairline)",
+        borderRadius: 16,
+        background: "var(--card)",
+        padding: "36px 36px 40px",
+      }}>
         {/* Eyebrow row */}
         <div className="flex items-center justify-between" style={{ marginBottom: 22 }}>
           <span className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>Hey, I'm</span>
@@ -539,12 +544,12 @@ function Hero() {
         </div>
 
         {/* Identity row: avatar + name + status */}
-        <div className="flex items-center" style={{ gap: 20, flexWrap: "wrap" }}>
+        <div className="flex items-center" style={{ gap: 24, flexWrap: "wrap" }}>
           <img
             src={manthanPhoto}
             alt="Manthan Jha"
             style={{
-              width: 96, height: 96,
+              width: 128, height: 128,
               borderRadius: "50%",
               objectFit: "cover",
               border: "1px solid var(--hairline)",
