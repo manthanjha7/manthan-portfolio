@@ -422,7 +422,7 @@ function TopNav({ active, onOpenPalette, theme, setTheme }) {
 
 function SectionHead({ num, label, kicker, action }) {
   return (
-    <div className="flex items-baseline justify-between" style={{ marginBottom: 36, paddingBottom: 16, borderBottom: "1px solid var(--hairline)" }}>
+    <div className="flex items-baseline justify-between" style={{ marginBottom: 20, paddingBottom: 14, borderBottom: "1px solid var(--hairline)" }}>
       <div className="flex items-baseline" style={{ gap: 18 }}>
         <span className="mono" style={{ color: "var(--accent)", fontSize: 13, letterSpacing: "0.02em" }}>{num}</span>
         <h2 style={{ margin: 0, fontSize: "clamp(23px, 2.3vw, 27px)", fontWeight: 600, letterSpacing: "-0.022em" }}>{label}</h2>
@@ -1034,7 +1034,7 @@ function TimelineList({ items }) {
 
 function Experience() {
   return (
-    <section id="experience" className="anchor" style={{ paddingTop: 80, paddingBottom: 80 }}>
+    <section id="experience" className="anchor" style={{ paddingTop: 48, paddingBottom: 48 }}>
       <SectionHead num="01" label="Experience" action={{ label: "View LinkedIn", href: "https://www.linkedin.com/in/manthan7805" }} />
       <TimelineList items={EXPERIENCE} />
     </section>
@@ -1043,7 +1043,7 @@ function Experience() {
 
 function Education() {
   return (
-    <section id="education" className="anchor" style={{ paddingTop: 80, paddingBottom: 80 }}>
+    <section id="education" className="anchor" style={{ paddingTop: 48, paddingBottom: 48 }}>
       <SectionHead num="02" label="Education" />
       <TimelineList items={EDUCATION} />
     </section>
