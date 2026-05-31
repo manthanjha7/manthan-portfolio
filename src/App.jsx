@@ -543,6 +543,8 @@ function Hero() {
           <span className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>{clock}</span>
         </div>
 
+        <div className="m-stack-1" style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 280px)", gap: 40 }}>
+        <div>
         {/* Identity row: avatar + name + status */}
         <div className="flex items-center" style={{ gap: 24, flexWrap: "wrap" }}>
           <img
@@ -621,6 +623,45 @@ function Hero() {
           <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, letterSpacing: "0.04em" }}>TL;DR — </span>
           Product strategy intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) — helped scale $0 → $100K ARR in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (40% CAC reduction). 1st place at IIT Roorkee's Tech GC (~INR 18L projected savings). IIT Roorkee, Integrated M.Tech.
         </p>
+        </div>
+
+        {/* Right column: On now + Exploring */}
+        <aside style={{ display: "grid", gap: 28, alignContent: "start" }}>
+          <div>
+            <div className="mono" style={{ fontSize: 11, color: "var(--ink-3)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>
+              On now
+            </div>
+            <dl style={{ margin: 0, display: "grid", gap: 14 }}>
+              {ABOUT_INFO.map(it => (
+                <div key={it.label} style={{ display: "grid", gap: 2 }}>
+                  <dt className="mono" style={{ fontSize: 11, color: "var(--ink-4)", letterSpacing: "0.04em" }}>
+                    {it.label.toUpperCase()}
+                  </dt>
+                  <dd style={{ margin: 0, fontSize: 14, color: "var(--ink)", fontWeight: 500 }}>{it.value}</dd>
+                  {it.sub && <dd style={{ margin: 0, fontSize: 12.5, color: "var(--ink-3)" }}>{it.sub}</dd>}
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div>
+            <div className="mono" style={{ fontSize: 11, color: "var(--ink-3)", letterSpacing: "0.08em", marginBottom: 14, textTransform: "uppercase" }}>
+              Now exploring
+            </div>
+            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "grid", gap: 8 }}>
+              {EXPLORING.slice(0, 4).map((e, i) => (
+                <li key={i} style={{ display: "flex", alignItems: "baseline", gap: 8, fontSize: 13, color: "var(--ink-2)", lineHeight: 1.45 }}>
+                  <span aria-hidden style={{
+                    flexShrink: 0, width: 4, height: 4, borderRadius: "50%",
+                    background: "var(--accent)", marginTop: 6,
+                  }} />
+                  <span>{e.t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+        </div>
       </div>
     </section>
   );
