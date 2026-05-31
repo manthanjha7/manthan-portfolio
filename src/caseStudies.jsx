@@ -5,7 +5,7 @@ import React, { useEffect as csUseEffect, useRef as csUseRef, useState as csUseS
    Every project's case study is an ordered list of blocks.
    Each block is a tagged object: { type, ...props }.
    The renderer below switches on `type`. To add new content,
-   just append a new block to PROJECTS[i].caseStudy.blocks — no
+   just append a new block to PROJECTS[i].caseStudy.blocks - no
    custom JSX needed per project.
 
    AVAILABLE BLOCK TYPES
@@ -65,31 +65,31 @@ const csImageFrame = {
 };
 
 /* ============================================================
-   PROJECTS — list shown on the homepage card stack
+   PROJECTS - list shown on the homepage card stack
    Each one carries a caseStudy = { title, meta, blocks: [...] }
 ============================================================ */
 
 const PROJECTS = [
-  /* ---------------- FINA — full case study ---------------- */
+  /* ---------------- FINA - full case study ---------------- */
   {
     id: "fina",
-    name: "Fina — AI copilot for the CFO office",
-    one: "Designed and shipped the question-to-answer surface — ask a question, get a sourced, defensible answer on SEC disclosures and peer benchmarking.",
+    name: "Fina - AI copilot for the CFO office",
+    one: "Designed and shipped the question-to-answer surface - ask a question, get a sourced, defensible answer on SEC disclosures and peer benchmarking.",
     tag: "Live",
     heroLabel: "Fina · product surface",
     caseStudy: {
-      title: "Fina — AI copilot for the CFO office",
+      title: "Fina - AI copilot for the CFO office",
       meta: {
         items: [
           { k: "Product",  v: "Fina (by Finrep)" },
           { k: "My Role",  v: "Product Manager" },
-          { k: "Timeline", v: "Aug 25 — Present" },
+          { k: "Timeline", v: "Aug 25 - Present" },
           { k: "Status",   v: "Live · v1" },
           { k: "Impact",   v: "Used by [X] CFO teams · [Y] queries/day" }, // [EDIT] real adoption numbers
         ],
         heading: "Overview",
         bodies: [
-          "Fina is a research copilot for the CFO office. Ask a question in plain English — about a peer's disclosure, a recent 8-K, a footnote in a 10-K — and get a sourced, citation-backed answer in seconds.",
+          "Fina is a research copilot for the CFO office. Ask a question in plain English - about a peer's disclosure, a recent 8-K, a footnote in a 10-K - and get a sourced, citation-backed answer in seconds.",
           "This case study focuses on the problem I spent the most time on as we shipped v1: making the model's answer defensible enough that a finance team will actually paste it into their own deck.",
         ],
       },
@@ -97,7 +97,7 @@ const PROJECTS = [
         { type: "hero", label: "Fina · answer surface", aspect: "16/10" },
 
         { type: "heading", text: "A CFO will not paste a model's answer\ninto a board deck unless they can audit it." },
-        { type: "body",    text: "We could already retrieve the right paragraph from the right filing. The hard part was the last 10% — turning that retrieval into an answer the user trusted enough to *use*. Without that, Fina was a fancy demo." },
+        { type: "body",    text: "We could already retrieve the right paragraph from the right filing. The hard part was the last 10% - turning that retrieval into an answer the user trusted enough to *use*. Without that, Fina was a fancy demo." },
 
         { type: "image",   label: "Sourced answer card", aspect: "16/9" },
 
@@ -105,7 +105,7 @@ const PROJECTS = [
         { type: "cards3",  items: [
           { title: "Answer surface",       body: "Question → sourced answer with inline citations the user can click through to the underlying paragraph." },
           { title: "Peer benchmark grid",  body: "Compare disclosures across a defined peer set in one structured grid, with the source filing one click away." },
-          { title: "Audit trail",          body: "Every answer carries a versioned trace — which sources, which prompt, which model — so finance can defend the output." },
+          { title: "Audit trail",          body: "Every answer carries a versioned trace - which sources, which prompt, which model - so finance can defend the output." },
         ]},
         { type: "imageGrid", cols: 2, items: [
           { label: "Citation drawer" },
@@ -113,7 +113,7 @@ const PROJECTS = [
         ]},
 
         { type: "heading", text: "The flow looked complete.\nUsers were dropping at the citation step." },
-        { type: "body",    text: "Ask a question, scan the answer, expand citations to verify, copy. The flow had four steps. Users were stalling at step three — they'd ask, read the answer, then leave without ever opening a single citation." },
+        { type: "body",    text: "Ask a question, scan the answer, expand citations to verify, copy. The flow had four steps. Users were stalling at step three - they'd ask, read the answer, then leave without ever opening a single citation." },
         { type: "flow",    steps: [
           { label: "Ask",         state: "idle" },
           { label: "Answer",      state: "idle" },
@@ -123,11 +123,11 @@ const PROJECTS = [
         { type: "image",   label: "Funnel · session-replay analysis", aspect: "16/9", caption: "We watched ~30 replays in a week. The pattern was always the same: users skimmed the answer, never clicked a citation, then closed the tab." },
 
         { type: "heading", text: "This was not a UX problem.\nIt was a trust problem." },
-        { type: "body",    text: "We had built citations as a *secondary surface* — collapsed, two clicks away. The user had to choose to trust the model before they'd ever see the evidence. Enterprise finance doesn't work that way: the evidence has to come first." },
+        { type: "body",    text: "We had built citations as a *secondary surface* - collapsed, two clicks away. The user had to choose to trust the model before they'd ever see the evidence. Enterprise finance doesn't work that way: the evidence has to come first." },
         { type: "quote",   text: "“The model's answer was the headline. The source was a footnote. We had to flip that.”" },
 
         { type: "heading", text: "So we made the source the answer." },
-        { type: "body",    text: "We rebuilt the answer surface so the citation paragraph is the primary visual — the model's synthesis sits below as a one-line summary. Same data, completely different posture. Verification stopped being a step; it became the default view." },
+        { type: "body",    text: "We rebuilt the answer surface so the citation paragraph is the primary visual - the model's synthesis sits below as a one-line summary. Same data, completely different posture. Verification stopped being a step; it became the default view." },
         { type: "flowCards", items: [
           { title: "Old default",      sub: "Model answer · citations collapsed", state: "danger"  },
           { title: "Reframed",         sub: "Source paragraph forward",            state: "neutral" },
@@ -136,7 +136,7 @@ const PROJECTS = [
         ]},
 
         { type: "heading", text: "Evals as a product habit, not a launch checklist." },
-        { type: "body",    text: "We set up a 200-example eval set the team runs on every model or prompt change. Pass/fail isn't manual any more — we ship model updates the same way we ship code. The biggest unlock wasn't accuracy; it was the team's confidence to iterate." },
+        { type: "body",    text: "We set up a 200-example eval set the team runs on every model or prompt change. Pass/fail isn't manual any more - we ship model updates the same way we ship code. The biggest unlock wasn't accuracy; it was the team's confidence to iterate." },
         { type: "image",   label: "Eval dashboard", aspect: "16/9" },
 
         // [EDIT] confirm these impact numbers before the site is public
@@ -146,7 +146,7 @@ const PROJECTS = [
           { stat: "200",  label: "Eval cases run on every model change" },
         ]},
 
-        { type: "testimonial", quote: "Working with Manthan made the model the easy part. The hard part — convincing a CFO to actually trust the output — that's what he owns.", name: "[EDIT] Engineering lead", role: "Finrep" },
+        { type: "testimonial", quote: "Working with Manthan made the model the easy part. The hard part - convincing a CFO to actually trust the output - that's what he owns.", name: "[EDIT] Engineering lead", role: "Finrep" },
       ],
     },
   },
@@ -154,30 +154,30 @@ const PROJECTS = [
   /* ---------------- SECTION 16 PLATFORM ---------------- */
   {
     id: "section16",
-    name: "Section 16 Platform — SEC ownership reporting",
+    name: "Section 16 Platform - SEC ownership reporting",
     one: "End-to-end Forms 3/4/5: transaction ledger, vesting calendar, footnote generation, and automated EDGAR filing.",
     tag: "Live",
     heroLabel: "Section 16 · transaction ledger",
     caseStudy: {
-      title: "Section 16 Platform — SEC ownership reporting",
+      title: "Section 16 Platform - SEC ownership reporting",
       meta: {
         items: [
           { k: "Product",  v: "Section 16 (by Finrep)" },
-          { k: "My Role",  v: "Product Manager — full surface" },
+          { k: "My Role",  v: "Product Manager - full surface" },
           { k: "Timeline", v: "[EDIT] – Present" },
           { k: "Status",   v: "Live" },
           { k: "Impact",   v: "[X] filings shipped · 103-event analytics taxonomy" },
         ],
         heading: "Overview",
-        body: "The Section 16 platform takes a grant from the moment HR enters it through to EDGAR submission — vesting calendar, footnotes, transaction ledger, late-filing reconciliation — all on one surface. I owned the spec end-to-end and the analytics layer that lets us actually understand how it's used.",
+        body: "The Section 16 platform takes a grant from the moment HR enters it through to EDGAR submission - vesting calendar, footnotes, transaction ledger, late-filing reconciliation - all on one surface. I owned the spec end-to-end and the analytics layer that lets us actually understand how it's used.",
       },
       blocks: [
         { type: "hero",    label: "Section 16 · main surface", aspect: "16/10" },
         { type: "heading", text: "One surface, six legally distinct flows." },
         { type: "body",    text: "[EDIT] Walkthrough of how grant entry, vesting, transactions, footnotes, late filings, and the EDGAR submission all live on one ledger." },
         { type: "imageGrid", cols: 2, items: [{ label: "Grant entry" }, { label: "Vesting calendar" }] },
-        { type: "quote",   text: "“[EDIT] Pull quote — the moment we realised footnotes were the actual product.”" },
-        { type: "heading", text: "[EDIT] Section heading — the bottleneck we found." },
+        { type: "quote",   text: "“[EDIT] Pull quote - the moment we realised footnotes were the actual product.”" },
+        { type: "heading", text: "[EDIT] Section heading - the bottleneck we found." },
         { type: "body",    text: "[EDIT] What broke when volume scaled. The decision. The fix." },
         { type: "impact",  items: [
           { stat: "[X]",   label: "Filings shipped" },
@@ -191,12 +191,12 @@ const PROJECTS = [
   /* ---------------- GRID REPORTS ---------------- */
   {
     id: "grid",
-    name: "Grid Reports — Benchmarking Engine",
+    name: "Grid Reports - Benchmarking Engine",
     one: "Compare disclosures, metrics, and positioning across a defined peer set in one structured grid.",
     tag: "WIP",
     heroLabel: "Grid Reports · benchmarking",
     caseStudy: {
-      title: "Grid Reports — Benchmarking Engine",
+      title: "Grid Reports - Benchmarking Engine",
       meta: {
         items: [
           { k: "Product",  v: "Grid Reports (by Finrep)" },
@@ -206,12 +206,12 @@ const PROJECTS = [
           { k: "Impact",   v: "[EDIT]" },
         ],
         heading: "Overview",
-        body: "The hard part of benchmarking isn't the grid — it's deciding what 'comparable' means when two companies disclose the same thing in incompatible shapes. This case study is about the decomposition + normalization layer that turns messy filings into a grid an analyst can actually defend.",
+        body: "The hard part of benchmarking isn't the grid - it's deciding what 'comparable' means when two companies disclose the same thing in incompatible shapes. This case study is about the decomposition + normalization layer that turns messy filings into a grid an analyst can actually defend.",
       },
       blocks: [
         { type: "hero",    label: "Grid Reports · peer view", aspect: "16/10" },
         { type: "heading", text: "[EDIT] Define 'comparable' before you build the grid." },
-        { type: "body",    text: "[EDIT] Decomposition logic — how we split disclosures into atomic claims." },
+        { type: "body",    text: "[EDIT] Decomposition logic - how we split disclosures into atomic claims." },
         { type: "image",   label: "Decomposition flow", aspect: "16/9" },
       ],
     },
@@ -235,7 +235,7 @@ const PROJECTS = [
           { k: "Impact",   v: "Weekly replay reviews → roadmap input" },
         ],
         heading: "Overview",
-        body: "The win wasn't 'more data' — it was a shared vocabulary. I set the taxonomy, owned the dashboards, and turned weekly replay reviews into the discovery engine that shapes the roadmap.",
+        body: "The win wasn't 'more data' - it was a shared vocabulary. I set the taxonomy, owned the dashboards, and turned weekly replay reviews into the discovery engine that shapes the roadmap.",
       },
       blocks: [
         { type: "hero",    label: "Funnels · weekly review", aspect: "16/10" },
@@ -541,7 +541,7 @@ function renderBlock(b, i) {
 }
 
 /* ============================================================
-   CASE STUDY VIEW — fullscreen overlay
+   CASE STUDY VIEW - fullscreen overlay
 ============================================================ */
 
 function CaseStudyView({ project, onClose, onNext }) {

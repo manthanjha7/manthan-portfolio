@@ -9,7 +9,7 @@ const prefersReduced = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ============================================================
-   EncryptedText — scrambles characters, then reveals the real
+   EncryptedText - scrambles characters, then reveals the real
    text left-to-right (Aceternity "encrypted-text").
 ============================================================ */
 const ENC_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*<>/\\[]{}=+-";
@@ -43,7 +43,7 @@ export function EncryptedText({ text, className, style, charset = ENC_CHARS, dur
 }
 
 /* ============================================================
-   MagneticButton — drifts toward the cursor on hover, springs
+   MagneticButton - drifts toward the cursor on hover, springs
    back on leave (Aceternity "magnetic-button").
 ============================================================ */
 export function MagneticButton({ children, className, strength = 0.35, ...rest }) {
@@ -78,7 +78,7 @@ export function MagneticButton({ children, className, strength = 0.35, ...rest }
 }
 
 /* ============================================================
-   CometCard — perspective 3D tilt toward the cursor + a moving
+   CometCard - perspective 3D tilt toward the cursor + a moving
    glare highlight (Aceternity "comet-card").
 ============================================================ */
 export function CometCard({ children, className, rotateDepth = 13, scaleOnHover = 1.02, radius = 14 }) {
@@ -132,7 +132,7 @@ export function CometCard({ children, className, rotateDepth = 13, scaleOnHover 
 }
 
 /* ============================================================
-   BackgroundGradient — animated multi-radial gradient that sits
+   BackgroundGradient - animated multi-radial gradient that sits
    behind content as a glowing, moving border (Aceternity
    "background-gradient"), tuned to the accent palette.
 ============================================================ */

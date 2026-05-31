@@ -13,7 +13,7 @@ import iitRoorkeeLogo from "./logos/iit-roorkee.png";
 ============================================================ */
 
 const NAME = "Manthan Jha";
-const ROLE = "Product Manager — fintech · AI";
+const ROLE = "Product Manager - fintech · AI";
 
 /* Headline alternates considered:
    "Turning financial complexity into products people trust."
@@ -22,8 +22,8 @@ const ROLE = "Product Manager — fintech · AI";
 const HEADLINE = "I make complicated products feel obvious.";
 /* Hero intro is rendered inline in <Hero> below (it contains links). */
 
-/* ABOUT — credential chips for hero (2x2).
-   `Icon` is a Lucide component — swap any one to change that chip's icon. */
+/* ABOUT - credential chips for hero (2x2).
+   `Icon` is a Lucide component - swap any one to change that chip's icon. */
 const CREDENTIALS = [
   { Icon: GraduationCap, label: "IIT Roorkee" },
   { Icon: Sparkles,      label: "AI Product Manager" },
@@ -33,7 +33,7 @@ const CREDENTIALS = [
 
 /* ABOUT modal content */
 const ABOUT_BIO_LEFT  = "I'm Manthan. A PM who finds clarity in regulated, high-stakes products. My best work happens when the data is messy, the spec is moving, and the user has zero patience for cleverness.";
-const ABOUT_BIO_RIGHT = "Outside work I'm usually deep in a product teardown, hunting good coffee, or arguing about checkout flows. The instinct is always the same — make the next step obvious.";
+const ABOUT_BIO_RIGHT = "Outside work I'm usually deep in a product teardown, hunting good coffee, or arguing about checkout flows. The instinct is always the same - make the next step obvious.";
 
 const ABOUT_INFO = [
   { label: "Status",    value: "Open to PM / APM", sub: "Internships & APM roles" },
@@ -43,7 +43,7 @@ const ABOUT_INFO = [
 
 const MILESTONES = [
   { date: "2026",     title: "Open to roles",       note: "PM / APM" },
-  { date: "Mar 2026", title: "Fina — v1",           note: "AI copilot for the CFO office" },
+  { date: "Mar 2026", title: "Fina - v1",           note: "AI copilot for the CFO office" },
   { date: "Nov 2025", title: "Section 16 Platform", note: "Forms 3/4/5 end-to-end" },
   { date: "Aug 2025", title: "Joined Finrep",       note: "Product Management Intern" },
   { date: "May 2025", title: "Tryo",                note: "Founder's Office Intern" },
@@ -56,9 +56,9 @@ const SECTIONS = [
   { id: "education",    num: "02", label: "Education" },
   { id: "achievements", num: "03", label: "Achievements" },
   { id: "github",       num: "04", label: "GitHub" },
-  // { id: "projects",  num: "05", label: "Projects" },   // hidden — re-enable later (also uncomment <Projects/> in <main> + restore num)
+  // { id: "projects",  num: "05", label: "Projects" },   // hidden - re-enable later (also uncomment <Projects/> in <main> + restore num)
   { id: "writing",      num: "05", label: "Writing" },
-  // { id: "exploring", num: "07", label: "Exploring" }, // hidden — re-enable later (also uncomment <Exploring/> in <main> + restore num)
+  // { id: "exploring", num: "07", label: "Exploring" }, // hidden - re-enable later (also uncomment <Exploring/> in <main> + restore num)
   { id: "reach",        num: "06", label: "Reach out" },
 ];
 
@@ -67,7 +67,7 @@ const GH_USERNAME = "manthanjha7";
 /* Real, verifiable achievements pulled from Jobs/profile.md + resume-base.md */
 const ACHIEVEMENTS = [
   {
-    title: "Tech GC 2026 — Geo-Blocking Analysis",
+    title: "Tech GC 2026 - Geo-Blocking Analysis",
     sub: "IIT Roorkee",
     note: "Secured #1. Dual-layer DBSCAN clustering across 21 cities (75.8% coverage). Projected INR 18.1L annual savings.",
     year: "Mar 2026",
@@ -79,7 +79,7 @@ const ACHIEVEMENTS = [
     year: "Jan – Feb 2025",
   },
   {
-    title: "Co-Founder — Swaps",
+    title: "Co-Founder - Swaps",
     sub: "College merchandise brand",
     note: "Scaled to INR 1L+ revenue in 6 months across campuses.",
     year: "Dec 2024 – May 2025",
@@ -95,26 +95,26 @@ const EXPERIENCE = [
     company: "Finrep",
     href: "https://finrep.ai",
     role: "Product Management Intern",
-    dates: "Aug 2025 — Present",
+    dates: "Aug 2025 - Present",
     logo: finrepLogo,
     note: "Joined as Finrep's first PM intern; helped scale $0→$100K ARR in 9 months. Owns analytics across 7 modules and ships features end-to-end.",
     bullets: [
       "Joined as Finrep's first PM intern; helped scale from $0 to $100K ARR in 9 months owning activation, retention, and feature scoping across the fintech product used daily by SEC reporting and technical accounting teams.",
       "Managed Mixpanel + Metabase setup from scratch across 7 modules, ran session replay reviews to surface activation gaps the team was missing, and shipped automations that halved analytics turnaround and unblocked the team's shipping cadence.",
-      "Scoped, designed, and shipped the ASC Codification Library end-to-end — a searchable in-product reference for 35,000+ FASB standards that let a key customer fully migrate off Intelligize/LexisNexis and consolidate their workflow.",
+      "Scoped, designed, and shipped the ASC Codification Library end-to-end - a searchable in-product reference for 35,000+ FASB standards that let a key customer fully migrate off Intelligize/LexisNexis and consolidate their workflow.",
     ],
   },
   {
     company: "Tryo",
     href: "https://www.linkedin.com/company/tryoclub/",
     role: "Founder's Office Intern",
-    dates: "May — Jul 2025",
+    dates: "May - Jul 2025",
     logo: tryoLogo,
     note: "Partnered with 8+ fast-fashion brands (Souled Store, Bear House, Bewakoof, Burger Bae). Drove daily-order growth via a Swish × Blinkit pamphlet GTM (−40% CAC) and referral screens (+10% referred customers).",
     bullets: [
       "Partnered with 8+ fast fashion brands including The Souled Store, The Bear House, Bewakoof, and Burger Bae, building long-term relationships that translated into sourcing wins and drove growth in the key apparel segment of our marketplace.",
-      "Drove daily order growth through offline marketing — partnered with Swish/Blinkit to distribute pamphlets inside delivery bags, reducing CAC by 40%, and designed referral screens that secured 10% referred customers.",
-      "Identified the supply-side gaps killing AOV in apparel by combining customer interviews with order-data analysis, then turned the findings into a sourcing roadmap the founders shipped — closing the demand gaps and lifting AOV across the category.",
+      "Drove daily order growth through offline marketing - partnered with Swish/Blinkit to distribute pamphlets inside delivery bags, reducing CAC by 40%, and designed referral screens that secured 10% referred customers.",
+      "Identified the supply-side gaps killing AOV in apparel by combining customer interviews with order-data analysis, then turned the findings into a sourcing roadmap the founders shipped - closing the demand gaps and lifting AOV across the category.",
     ],
   },
 ];
@@ -124,13 +124,13 @@ const EDUCATION = [
     company: "IIT Roorkee",
     href: "https://iitr.ac.in/",
     role: "Integrated M.Tech, Geological Technology",
-    dates: "2023 — 2028",
+    dates: "2023 - 2028",
     logo: iitRoorkeeLogo,
     note: "Roorkee, India.",
     bullets: [
-      "1st Prize, Tech GC 2026 (IIT Roorkee × COOX) — built a Python + DBSCAN geospatial clustering pipeline that extracted 72 actionable blocking zones across 21 cities, projecting INR 18.1L annual savings plus INR 1.5L/month in recovered fees.",
-      "Head of PR, Hi-Res · E-Summit 2025 — ran PR campaigns reaching 10K+ students, secured 14+ industry speakers (Adobe, Zomato, IBM) and 10+ partner-college collaborations, anchoring the flagship design-a-thon.",
-      "Co-Founder, Swaps — scaled a college merchandise brand to INR 1 lakh+ revenue in 6 months through strategic collaborations and end-to-end product delivery across campuses.",
+      "1st Prize, Tech GC 2026 (IIT Roorkee × COOX) - built a Python + DBSCAN geospatial clustering pipeline that extracted 72 actionable blocking zones across 21 cities, projecting INR 18.1L annual savings plus INR 1.5L/month in recovered fees.",
+      "Head of PR, Hi-Res · E-Summit 2025 - ran PR campaigns reaching 10K+ students, secured 14+ industry speakers (Adobe, Zomato, IBM) and 10+ partner-college collaborations, anchoring the flagship design-a-thon.",
+      "Co-Founder, Swaps - scaled a college merchandise brand to INR 1 lakh+ revenue in 6 months through strategic collaborations and end-to-end product delivery across campuses.",
     ],
   },
 ];
@@ -187,7 +187,7 @@ function useActiveSection() {
 }
 
 /* ============================================================
-   SCROLL REVEAL — sections fade + slide up on entering the viewport
+   SCROLL REVEAL - sections fade + slide up on entering the viewport
 ============================================================ */
 
 function useReveal() {
@@ -615,15 +615,15 @@ function Hero() {
               ))}
             </div>
 
-            {/* TL;DR — sits inside the right column beneath the Resume + icons row */}
+            {/* TL;DR - sits inside the right column beneath the Resume + icons row */}
             <p style={{
               margin: 0,
               fontSize: 16,
               lineHeight: 1.65,
               color: "var(--ink-2)",
             }}>
-              <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, letterSpacing: "0.04em" }}>TL;DR — </span>
-              Product strategy intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) — helped scale $0 → $100K ARR in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (40% CAC reduction). 1st place at IIT Roorkee's Tech GC (~INR 18L projected savings). IIT Roorkee, Integrated M.Tech.
+              <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, letterSpacing: "0.04em" }}>TL;DR - </span>
+              Product strategy intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) - helped scale $0 → $100K ARR in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (40% CAC reduction). 1st place at IIT Roorkee's Tech GC (~INR 18L projected savings). IIT Roorkee, Integrated M.Tech.
             </p>
           </div>
         </div>
@@ -633,7 +633,7 @@ function Hero() {
 }
 
 /* ============================================================
-   ABOUT MODAL — opens from "Know More"
+   ABOUT MODAL - opens from "Know More"
 ============================================================ */
 
 function AboutModal({ open, onClose }) {
@@ -1126,7 +1126,7 @@ function Achievements() {
             <div className="flex items-baseline justify-between" style={{ gap: 12, flexWrap: "wrap" }}>
               <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
                 <span style={{ fontSize: 17, fontWeight: 600, letterSpacing: "-0.01em" }}>{a.title}</span>
-                <span className="serif" style={{ fontStyle: "italic", color: "var(--ink-3)", fontSize: 13 }}>— {a.sub}</span>
+                <span className="serif" style={{ fontStyle: "italic", color: "var(--ink-3)", fontSize: 13 }}>- {a.sub}</span>
               </div>
               <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12 }}>{a.year}</span>
             </div>
@@ -1214,7 +1214,7 @@ function Exploring() {
 }
 
 /* ============================================================
-   GITHUB — live contribution graph (real data, public API)
+   GITHUB - live contribution graph (real data, public API)
    Fetches the contribution calendar at runtime so it always
    reflects the latest pushes. No fabricated numbers.
 ============================================================ */
@@ -1268,7 +1268,7 @@ function fmtGhDate(iso) {
 }
 
 function ContributionGrid({ weeks }) {
-  // Custom tooltip — appears instantly (no ~1s native `title` delay).
+  // Custom tooltip - appears instantly (no ~1s native `title` delay).
   const [tip, setTip] = useState(null); // { date, count, x, y }
   return (
     <div className="scroll-thin" style={{ overflowX: "auto" }}>
@@ -1380,7 +1380,7 @@ function GitHub() {
         )}
         {status === "error" && (
           <div style={{ fontSize: 13, color: "var(--ink-3)", padding: "16px 0" }}>
-            Couldn’t load the live graph right now — see it on{" "}
+            Couldn’t load the live graph right now - see it on{" "}
             <a href={"https://github.com/" + GH_USERNAME} target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>GitHub</a>.
           </div>
         )}
@@ -1411,7 +1411,7 @@ function ContactForm() {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Accept": "application/json", "Content-Type": "application/json" },
-        body: JSON.stringify({ email, message, _subject: "Portfolio contact — " + email }),
+        body: JSON.stringify({ email, message, _subject: "Portfolio contact - " + email }),
       });
       if (res.ok) {
         setStatus("sent");
@@ -1561,7 +1561,7 @@ function Footer() {
       </div>
 
       <div className="flex items-center justify-between" style={{ marginTop: 48, paddingTop: 18, borderTop: "1px solid var(--hairline-soft)", color: "var(--ink-3)", fontSize: 12, flexWrap: "wrap", gap: 12 }}>
-        <span className="mono">© 2026 Manthan Jha — built with Claude.</span>
+        <span className="mono">© 2026 Manthan Jha - built with Claude.</span>
       </div>
     </footer>
   );
@@ -1595,7 +1595,7 @@ function CommandPalette({ open, onClose, openCase }) {
     SECTIONS.forEach(s => items.push({
       kind: "Section", icon: Icon.hash, label: s.label, hint: s.num, action: () => { scrollToSection(s.id); }
     }));
-    // Projects hidden for now — palette won't list them. Re-enable when <Projects/> comes back.
+    // Projects hidden for now - palette won't list them. Re-enable when <Projects/> comes back.
     // const WORK_LIST = PROJECTS || [];
     // WORK_LIST.forEach(w => items.push({
     //   kind: "Project", icon: Icon.spark, label: w.name, hint: w.tag || "",
@@ -1833,9 +1833,9 @@ function App() {
         <Reveal><Education /></Reveal>
         <Reveal><Achievements /></Reveal>
         <Reveal><GitHub /></Reveal>
-        {/* <Reveal><Projects onOpenCase={(id) => setCaseId(id)} /></Reveal>  hidden — re-enable later */}
+        {/* <Reveal><Projects onOpenCase={(id) => setCaseId(id)} /></Reveal>  hidden - re-enable later */}
         <Reveal><Writing onOpenArticle={setArticleId} onOpenArticles={() => setArticlesOpen(true)} /></Reveal>
-        {/* <Reveal><Exploring /></Reveal>  hidden — re-enable later */}
+        {/* <Reveal><Exploring /></Reveal>  hidden - re-enable later */}
         <Reveal><Footer /></Reveal>
       </main>
 

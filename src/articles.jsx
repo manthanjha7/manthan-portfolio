@@ -15,7 +15,7 @@ const aPaper   = "var(--paper)";
 const aAccent  = "var(--accent)";
 
 /* ============================================================
-   DATA — ARTICLES
+   DATA - ARTICLES
    ----------------------------------------------------------------
    Each article uses the same block vocabulary as caseStudies.jsx
    (hero, heading, body, image, imageGrid, quote, cards3, impact,
@@ -109,7 +109,7 @@ const ARTICLES = [
 ];
 
 /* ============================================================
-   SHARED — Article card (used by Index and "More writing")
+   SHARED - Article card (used by Index and "More writing")
 ============================================================ */
 
 function ArticleCard({ article, onClick }) {
@@ -158,7 +158,7 @@ function ArticleCard({ article, onClick }) {
 }
 
 /* ============================================================
-   SHARED — sticky overlay back bar
+   SHARED - sticky overlay back bar
 ============================================================ */
 
 function OverlayBackBar({ title, onClose }) {
@@ -193,7 +193,7 @@ function OverlayBackBar({ title, onClose }) {
 }
 
 /* ============================================================
-   ARTICLE VIEW — fullscreen long-form overlay (OpenAI-style)
+   ARTICLE VIEW - fullscreen long-form overlay (OpenAI-style)
 ============================================================ */
 
 function ArticleView({ article, onClose, onOpenArticle }) {
@@ -219,7 +219,7 @@ function ArticleView({ article, onClose, onOpenArticle }) {
   const hasHero = article.blocks[0] && article.blocks[0].type === "hero";
   const bodyBlocks = hasHero ? article.blocks.slice(1) : article.blocks;
 
-  // "More writing" — up to 2 other articles after this one (cyclic)
+  // "More writing" - up to 2 other articles after this one (cyclic)
   const idx = ARTICLES.findIndex(a => a.id === article.id);
   const more = [
     ARTICLES[(idx + 1) % ARTICLES.length],
@@ -333,7 +333,7 @@ function ArticleView({ article, onClose, onOpenArticle }) {
 }
 
 /* ============================================================
-   ARTICLES INDEX VIEW — fullscreen 3-col grid overlay
+   ARTICLES INDEX VIEW - fullscreen 3-col grid overlay
 ============================================================ */
 
 function ArticlesIndexView({ open, onClose, onOpenArticle }) {

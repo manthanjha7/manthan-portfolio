@@ -1,5 +1,5 @@
 /* ============================================================
-   TAILWIND v4 — utilities + theme only (no Preflight reset, so the
+   TAILWIND v4 - utilities + theme only (no Preflight reset, so the
    already-styled base is untouched). Color/font tokens below alias
    the design tokens, so Tailwind utilities (bg-card, text-ink,
    border-hairline, font-mono…) are automatically theme-aware.
@@ -160,7 +160,7 @@ button { font-family: inherit; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes popIn  { from { opacity: 0; transform: translateY(-8px) scale(.985); } to { opacity: 1; transform: none; } }
 
-/* card lift — snappy, immediate per-block hover feedback */
+/* card lift - snappy, immediate per-block hover feedback */
 .card-lift {
   transition: transform 110ms cubic-bezier(.2,.7,.2,1),
               box-shadow 110ms cubic-bezier(.2,.7,.2,1),
@@ -175,7 +175,7 @@ button { font-family: inherit; }
 
 .accent-fade-target { transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, transform 220ms ease; }
 
-/* primary CTA — bordered, fills with accent on hover */
+/* primary CTA - bordered, fills with accent on hover */
 .btn-cta {
   display: inline-flex;
   align-items: center;
@@ -221,7 +221,7 @@ button { font-family: inherit; }
 }
 
 /* ============================================================
-   POLISH — scroll reveal + extra hover affordances
+   POLISH - scroll reveal + extra hover affordances
    (flex/gap/positioning utilities now come from Tailwind)
 ============================================================ */
 
@@ -236,7 +236,7 @@ button { font-family: inherit; }
   transform: none;
 }
 
-/* Exploring cells — give the only non-interactive blocks a hover */
+/* Exploring cells - give the only non-interactive blocks a hover */
 .explore-cell {
   background: var(--paper);
   transition: background-color .12s ease, border-color .12s ease;
@@ -265,7 +265,7 @@ a:hover .read-arrow { transform: translateX(3px); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--ink); }
 
 /* ============================================================
-   MOBILE PASS — single breakpoint, override classes win over
+   MOBILE PASS - single breakpoint, override classes win over
    inline styles via !important. Sprinkle these onto the right
    elements to collapse desktop grids on phones.
 ============================================================ */
