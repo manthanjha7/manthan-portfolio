@@ -4,6 +4,9 @@ import { PROJECTS, CaseStudyView, CSImage } from "./caseStudies.jsx";
 import { ARTICLES, ArticleView, ArticlesIndexView } from "./articles.jsx";
 import { EncryptedText, MagneticButton, CometCard, BackgroundGradient } from "./effects.jsx";
 import manthanPhoto from "./manthan.jpg";
+import finrepLogo from "./logos/finrep.jpg";
+import tryoLogo from "./logos/tryo.jpg";
+import iitRoorkeeLogo from "./logos/iit-roorkee.png";
 
 /* ============================================================
    DATA
@@ -93,6 +96,7 @@ const EXPERIENCE = [
     href: "https://finrep.ai",
     role: "Product Management Intern",
     dates: "Aug 2025 — Present",
+    logo: finrepLogo,
     note: "Joined as Finrep's first PM intern; helped scale $0→$100K ARR in 9 months. Owns analytics across 7 modules and ships features end-to-end.",
     bullets: [
       "Joined as Finrep's first PM intern; helped scale from $0 to $100K ARR in 9 months owning activation, retention, and feature scoping across the fintech product used daily by SEC reporting and technical accounting teams.",
@@ -105,6 +109,7 @@ const EXPERIENCE = [
     href: "https://www.linkedin.com/company/tryoclub/",
     role: "Founder's Office Intern",
     dates: "May — Jul 2025",
+    logo: tryoLogo,
     note: "Partnered with 8+ fast-fashion brands (Souled Store, Bear House, Bewakoof, Burger Bae). Drove daily-order growth via a Swish × Blinkit pamphlet GTM (−40% CAC) and referral screens (+10% referred customers).",
     bullets: [
       "Partnered with 8+ fast fashion brands including The Souled Store, The Bear House, Bewakoof, and Burger Bae, building long-term relationships that translated into sourcing wins and drove growth in the key apparel segment of our marketplace.",
@@ -120,6 +125,7 @@ const EDUCATION = [
     href: "https://iitr.ac.in/",
     role: "Integrated M.Tech, Geological Technology",
     dates: "2023 — 2028",
+    logo: iitRoorkeeLogo,
     note: "Roorkee, India.",
     bullets: [
       "1st Prize, Tech GC 2026 (IIT Roorkee × COOX) — built a Python + DBSCAN geospatial clustering pipeline that extracted 72 actionable blocking zones across 21 cities, projecting INR 18.1L annual savings plus INR 1.5L/month in recovered fees.",
@@ -946,16 +952,30 @@ function TimelineItem({ item, index, total, forceOpen }) {
       className="card-lift m-stack-1"
       style={{
         display: "grid",
-        gridTemplateColumns: "120px 1fr auto",
-        gap: 24,
-        padding: "22px 22px",
+        gridTemplateColumns: "48px 1fr auto",
+        gap: 18,
+        padding: "20px 22px",
         border: "1px solid var(--hairline)",
         borderRadius: 12,
         background: "var(--card)",
-        alignItems: "baseline",
+        alignItems: "start",
       }}
     >
-      <div className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>{item.dates}</div>
+      <div style={{
+        width: 48, height: 48,
+        borderRadius: 10,
+        border: "1px solid var(--hairline)",
+        background: "var(--paper-2)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        overflow: "hidden",
+        padding: 4, boxSizing: "border-box",
+        flexShrink: 0,
+      }}>
+        {item.logo ? (
+          <img src={item.logo} alt={item.company + " logo"}
+            style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+        ) : null}
+      </div>
       <div>
         <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
           {item.href ? (
@@ -1005,8 +1025,8 @@ function TimelineItem({ item, index, total, forceOpen }) {
           </div>
         )}
       </div>
-      <div className="flex items-center" style={{ gap: 10 }}>
-        <span className="mono m-hide" style={{ color: "var(--ink-4)", fontSize: 11 }}>{String(index + 1).padStart(2, "0")}</span>
+      <div className="flex items-center" style={{ gap: 10, paddingTop: 4 }}>
+        <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, whiteSpace: "nowrap" }}>{item.dates}</span>
         {hasBullets && !forceOpen && (
           <span aria-hidden style={{
             color: "var(--ink-3)",
