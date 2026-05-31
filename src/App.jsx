@@ -50,12 +50,13 @@ const MILESTONES = [
 const SECTIONS = [
   { id: "hero",         num: "00", label: "About" },
   { id: "experience",   num: "01", label: "Experience" },
-  { id: "achievements", num: "02", label: "Achievements" },
-  { id: "github",       num: "03", label: "GitHub" },
-  // { id: "projects",  num: "04", label: "Projects" },   // hidden — re-enable later (also uncomment <Projects/> in <main> + restore num)
-  { id: "writing",      num: "04", label: "Writing" },
-  // { id: "exploring", num: "06", label: "Exploring" }, // hidden — re-enable later (also uncomment <Exploring/> in <main> + restore num)
-  { id: "reach",        num: "05", label: "Reach out" },
+  { id: "education",    num: "02", label: "Education" },
+  { id: "achievements", num: "03", label: "Achievements" },
+  { id: "github",       num: "04", label: "GitHub" },
+  // { id: "projects",  num: "05", label: "Projects" },   // hidden — re-enable later (also uncomment <Projects/> in <main> + restore num)
+  { id: "writing",      num: "05", label: "Writing" },
+  // { id: "exploring", num: "07", label: "Exploring" }, // hidden — re-enable later (also uncomment <Exploring/> in <main> + restore num)
+  { id: "reach",        num: "06", label: "Reach out" },
 ];
 
 const GH_USERNAME = "manthanjha7";
@@ -101,6 +102,9 @@ const EXPERIENCE = [
     dates: "May — Jul 2025",
     note: "Partnered with 8+ fast-fashion brands (Souled Store, Bear House, Bewakoof, Burger Bae). Drove daily-order growth via a Swish × Blinkit pamphlet GTM (−40% CAC) and referral screens (+10% referred customers).",
   },
+];
+
+const EDUCATION = [
   {
     company: "IIT Roorkee",
     href: "https://iitr.ac.in/",
@@ -893,40 +897,55 @@ function Projects({ onOpenCase }) {
    EXPERIENCE
 ============================================================ */
 
+function TimelineList({ items }) {
+  return (
+    <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
+      {items.map((e, i) => (
+        <li key={i} className="card-lift m-stack-1" style={{
+          display: "grid",
+          gridTemplateColumns: "120px 1fr auto",
+          gap: 24,
+          padding: "22px 4px",
+          borderTop: "1px solid var(--hairline)",
+          borderBottom: i === items.length - 1 ? "1px solid var(--hairline)" : "none",
+          alignItems: "baseline",
+        }}>
+          <div className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>{e.dates}</div>
+          <div>
+            <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
+              {e.href ? (
+                <a href={e.href} target="_blank" rel="noopener" className="link-grow"
+                  style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em", color: "var(--accent)" }}>
+                  {e.company}
+                </a>
+              ) : (
+                <span style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em" }}>{e.company}</span>
+              )}
+            </div>
+            <div style={{ color: "var(--ink-2)", marginTop: 4, fontSize: 14 }}>{e.role}</div>
+            {e.note && <div style={{ color: "var(--ink-3)", marginTop: 6, fontSize: 13 }}>{e.note}</div>}
+          </div>
+          <span className="mono m-hide" style={{ color: "var(--ink-4)", fontSize: 11 }}>{String(i + 1).padStart(2, "0")}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 function Experience() {
   return (
     <section id="experience" className="anchor" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <SectionHead num="01" label="Experience" action={{ label: "View LinkedIn", href: "https://www.linkedin.com/in/manthan7805" }} />
-      <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
-        {EXPERIENCE.map((e, i) => (
-          <li key={i} className="card-lift m-stack-1" style={{
-            display: "grid",
-            gridTemplateColumns: "120px 1fr auto",
-            gap: 24,
-            padding: "22px 4px",
-            borderTop: "1px solid var(--hairline)",
-            borderBottom: i === EXPERIENCE.length - 1 ? "1px solid var(--hairline)" : "none",
-            alignItems: "baseline",
-          }}>
-            <div className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>{e.dates}</div>
-            <div>
-              <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
-                {e.href ? (
-                  <a href={e.href} target="_blank" rel="noopener" className="link-grow"
-                    style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em", color: "var(--accent)" }}>
-                    {e.company}
-                  </a>
-                ) : (
-                  <span style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em" }}>{e.company}</span>
-                )}
-              </div>
-              <div style={{ color: "var(--ink-2)", marginTop: 4, fontSize: 14 }}>{e.role}</div>
-              {e.note && <div style={{ color: "var(--ink-3)", marginTop: 6, fontSize: 13 }}>{e.note}</div>}
-            </div>
-            <span className="mono m-hide" style={{ color: "var(--ink-4)", fontSize: 11 }}>{String(i + 1).padStart(2, "0")}</span>
-          </li>
-        ))}
-      </ol>
+      <TimelineList items={EXPERIENCE} />
+    </section>
+  );
+}
+
+function Education() {
+  return (
+    <section id="education" className="anchor" style={{ paddingTop: 80, paddingBottom: 80 }}>
+      <SectionHead num="02" label="Education" />
+      <TimelineList items={EDUCATION} />
     </section>
   );
 }
@@ -938,7 +957,7 @@ function Experience() {
 function Achievements() {
   return (
     <section id="achievements" className="anchor m-pad-y-56" style={{ paddingTop: 80, paddingBottom: 80 }}>
-      <SectionHead num="02" label="Achievements" />
+      <SectionHead num="03" label="Achievements" />
       <ol style={{ listStyle: "none", padding: 0, margin: 0 }}>
         {ACHIEVEMENTS.map((a, i) => (
           <li key={i} className="card-lift" style={{
@@ -969,7 +988,7 @@ function Writing({ onOpenArticle, onOpenArticles }) {
   const featured = ARTICLES.slice(0, 3);
   return (
     <section id="writing" className="anchor m-pad-y-56" style={{ paddingTop: 80, paddingBottom: 80 }}>
-      <SectionHead num="04" label="Writing" action={{ label: "All writing", onClick: onOpenArticles }} />
+      <SectionHead num="05" label="Writing" action={{ label: "All writing", onClick: onOpenArticles }} />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
         {featured.map((a, i) => (
           <button
@@ -1173,7 +1192,7 @@ function GitHub() {
 
   return (
     <section id="github" className="anchor m-pad-y-56" style={{ paddingTop: 80, paddingBottom: 80 }}>
-      <SectionHead num="03" label="GitHub" action={{ label: "View profile", href: "https://github.com/" + GH_USERNAME }} />
+      <SectionHead num="04" label="GitHub" action={{ label: "View profile", href: "https://github.com/" + GH_USERNAME }} />
 
       {status === "ok" && (
         <div className="m-stack-2" style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: 14, marginBottom: 18 }}>
@@ -1315,7 +1334,7 @@ function Footer() {
   ];
   return (
     <footer id="reach" className="anchor m-pad-y-56" style={{ borderTop: "1px solid var(--hairline)", paddingTop: 56, paddingBottom: 56, marginTop: 40 }}>
-      <SectionHead num="05" label="Reach out" />
+      <SectionHead num="06" label="Reach out" />
       <div className="flex items-start justify-between m-flex-col" style={{ gap: 48, flexWrap: "wrap" }}>
         <div style={{ flex: "1 1 360px", maxWidth: 480 }}>
           <div style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: 28, fontWeight: 400, letterSpacing: "-0.01em", marginTop: 0, lineHeight: 1.25, maxWidth: "26ch" }}>
@@ -1654,6 +1673,7 @@ function App() {
       <main className="mx-auto m-pad-x" style={{ maxWidth: 1180, padding: "0 28px" }}>
         <Hero onOpenAbout={() => setAboutOpen(true)} />
         <Reveal><Experience /></Reveal>
+        <Reveal><Education /></Reveal>
         <Reveal><Achievements /></Reveal>
         <Reveal><GitHub /></Reveal>
         {/* <Reveal><Projects onOpenCase={(id) => setCaseId(id)} /></Reveal>  hidden — re-enable later */}
