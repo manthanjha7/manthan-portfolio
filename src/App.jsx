@@ -95,9 +95,9 @@ const EXPERIENCE = [
     dates: "Aug 2025 — Present",
     note: "Joined as Finrep's first PM intern; helped scale $0→$100K ARR in 9 months. Owns analytics across 7 modules and ships features end-to-end.",
     bullets: [
-      "Joined as the first PM intern; helped scale Finrep from $0 → $100K ARR in 9 months across the CFO-office product.",
-      "Stood up Mixpanel + Metabase across 7 surfaces; built Claude-skill automations that cut weekly user analytics from 4–6 hrs to 1–2.",
-      "Shipped the ASC Codification Library end-to-end — a searchable in-product reference for 35,000+ FASB standards that let a key customer migrate fully off Intelligize/LexisNexis.",
+      "Joined as Finrep's first PM intern; helped scale from $0 to $100K ARR in 9 months owning activation, retention, and feature scoping across the fintech product used daily by SEC reporting and technical accounting teams.",
+      "Managed Mixpanel + Metabase setup from scratch across 7 modules, ran session replay reviews to surface activation gaps the team was missing, and shipped automations that halved analytics turnaround and unblocked the team's shipping cadence.",
+      "Scoped, designed, and shipped the ASC Codification Library end-to-end — a searchable in-product reference for 35,000+ FASB standards that let a key customer fully migrate off Intelligize/LexisNexis and consolidate their workflow.",
     ],
   },
   {
@@ -107,9 +107,9 @@ const EXPERIENCE = [
     dates: "May — Jul 2025",
     note: "Partnered with 8+ fast-fashion brands (Souled Store, Bear House, Bewakoof, Burger Bae). Drove daily-order growth via a Swish × Blinkit pamphlet GTM (−40% CAC) and referral screens (+10% referred customers).",
     bullets: [
-      "Ran 20+ customer calls with apparel D2C brands (Souled Store, Bewakoof, Burger Bae); findings shaped Tryo's supplier roadmap.",
-      "Drove a 40% CAC reduction by partnering with Swish & Blinkit on offline distribution — owned the GTM end-to-end.",
-      "Designed referral screens that drove 10% retention; ran dark-store ops by setting up SOPs for inventory and fulfilment.",
+      "Partnered with 8+ fast fashion brands including The Souled Store, The Bear House, Bewakoof, and Burger Bae, building long-term relationships that translated into sourcing wins and drove growth in the key apparel segment of our marketplace.",
+      "Drove daily order growth through offline marketing — partnered with Swish/Blinkit to distribute pamphlets inside delivery bags, reducing CAC by 40%, and designed referral screens that secured 10% referred customers.",
+      "Identified the supply-side gaps killing AOV in apparel by combining customer interviews with order-data analysis, then turned the findings into a sourcing roadmap the founders shipped — closing the demand gaps and lifting AOV across the category.",
     ],
   },
 ];
@@ -122,9 +122,9 @@ const EDUCATION = [
     dates: "2023 — 2028",
     note: "Roorkee, India.",
     bullets: [
-      "Tech GC 2026 — secured #1 with a dual-layer DBSCAN geo-blocking pipeline projecting INR 18.1L annual savings for COOX.",
-      "Head of PR, Hi-Res · E-Summit 2025 — reached 10K+ students and secured 14+ industry speakers (Adobe, Zomato, IBM).",
-      "Co-founded Swaps, a college-merch brand that crossed INR 1L+ revenue in 6 months across IIT campuses.",
+      "1st Prize, Tech GC 2026 (IIT Roorkee × COOX) — built a Python + DBSCAN geospatial clustering pipeline that extracted 72 actionable blocking zones across 21 cities, projecting INR 18.1L annual savings plus INR 1.5L/month in recovered fees.",
+      "Head of PR, Hi-Res · E-Summit 2025 — ran PR campaigns reaching 10K+ students, secured 14+ industry speakers (Adobe, Zomato, IBM) and 10+ partner-college collaborations, anchoring the flagship design-a-thon.",
+      "Co-Founder, Swaps — scaled a college merchandise brand to INR 1 lakh+ revenue in 6 months through strategic collaborations and end-to-end product delivery across campuses.",
     ],
   },
 ];
@@ -1034,7 +1034,7 @@ function TimelineList({ items }) {
 
 function Experience() {
   return (
-    <section id="experience" className="anchor" style={{ paddingTop: 48, paddingBottom: 48 }}>
+    <section id="experience" className="anchor" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <SectionHead num="01" label="Experience" action={{ label: "View LinkedIn", href: "https://www.linkedin.com/in/manthan7805" }} />
       <TimelineList items={EXPERIENCE} />
     </section>
@@ -1043,7 +1043,7 @@ function Experience() {
 
 function Education() {
   return (
-    <section id="education" className="anchor" style={{ paddingTop: 48, paddingBottom: 48 }}>
+    <section id="education" className="anchor" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <SectionHead num="02" label="Education" />
       <TimelineList items={EDUCATION} />
     </section>
