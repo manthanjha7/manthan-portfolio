@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from "react"
 import { GraduationCap, Sparkles, Briefcase } from "lucide-react";
 import { PROJECTS, CaseStudyView, CSImage } from "./caseStudies.jsx";
 import { ARTICLES, ArticleView, ArticlesIndexView } from "./articles.jsx";
-import { EncryptedText, MagneticButton, CometCard, BackgroundGradient } from "./effects.jsx";
+import { EncryptedText, MagneticButton, CometCard, BackgroundGradient, GlowingEffect } from "./effects.jsx";
 import manthanPhoto from "./manthan.jpg";
 import finrepLogo from "./logos/finrep.jpg";
 import tryoLogo from "./logos/tryo.jpg";
@@ -550,18 +550,28 @@ function Hero() {
           gap: 32,
           alignItems: "start",
         }}>
-          <img
-            src={manthanPhoto}
-            alt="Manthan Jha"
-            style={{
-              width: "100%",
-              aspectRatio: "1 / 1",
-              objectFit: "cover",
-              borderRadius: 14,
-              border: "1px solid var(--hairline)",
-              display: "block",
-            }}
-          />
+          <div style={{ position: "relative", borderRadius: 14 }}>
+            <GlowingEffect
+              disabled={false}
+              proximity={64}
+              spread={40}
+              borderWidth={2}
+              inactiveZone={0.6}
+              movementDuration={1.5}
+            />
+            <img
+              src={manthanPhoto}
+              alt="Manthan Jha"
+              style={{
+                width: "100%",
+                aspectRatio: "1 / 1",
+                objectFit: "cover",
+                borderRadius: 14,
+                border: "1px solid var(--hairline)",
+                display: "block",
+              }}
+            />
+          </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 20, minWidth: 0 }}>
             <div>
