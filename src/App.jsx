@@ -321,7 +321,36 @@ const Icon = {
       <rect x="3" y="4" width="18" height="16" rx="2" /><circle cx="9" cy="10" r="1.6" /><path d="m21 16-4.5-4.5L7 21" />
     </svg>
   ),
+  calendar: (p) => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <rect x="3" y="5" width="18" height="16" rx="2" /><path d="M16 3v4M8 3v4M3 11h18" />
+    </svg>
+  ),
+  linkedin: (p) => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" {...p}>
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+    </svg>
+  ),
+  mail: (p) => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" />
+    </svg>
+  ),
+  github: (p) => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" {...p}>
+      <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.41-5.26 5.69.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.8.56C20.22 21.38 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/>
+    </svg>
+  ),
+  send: (p) => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" />
+    </svg>
+  ),
 };
+
+const BOOK_URL = "https://cal.com/manthanjha";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjrygnl";
+const RECEIVER_EMAIL = "manthank2021@gmail.com";
 
 /* ============================================================
    TOP NAV
@@ -1188,34 +1217,170 @@ function GitHub() {
    FOOTER
 ============================================================ */
 
+function ContactForm() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const canSubmit = email.trim() && message.trim() && status !== "sending";
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    if (!canSubmit) return;
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify({ email, message, _subject: "Portfolio contact — " + email }),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        setEmail("");
+        setMessage("");
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg((data && data.errors && data.errors[0] && data.errors[0].message) || "Something went wrong. Try again or email me directly.");
+        setStatus("error");
+      }
+    } catch (err) {
+      setErrorMsg("Couldn't reach the server. Check your connection or email me directly.");
+      setStatus("error");
+    }
+  }
+
+  return (
+    <form onSubmit={onSubmit} style={{ display: "grid", gap: 14, minWidth: 280 }}>
+      <label style={{ display: "grid", gap: 6 }}>
+        <span style={{ fontSize: 13, color: "var(--ink-2)" }}>Your email</span>
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@example.com"
+          style={{
+            padding: "11px 13px", fontSize: 14,
+            background: "var(--card)", color: "var(--ink)",
+            border: "1px solid var(--hairline)", borderRadius: 10,
+            outline: "none", font: "inherit",
+          }}
+        />
+      </label>
+      <label style={{ display: "grid", gap: 6 }}>
+        <span style={{ fontSize: 13, color: "var(--ink-2)" }}>Your message</span>
+        <textarea
+          required
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          rows={5}
+          placeholder="Type your message here."
+          style={{
+            padding: "11px 13px", fontSize: 14, resize: "vertical",
+            background: "var(--card)", color: "var(--ink)",
+            border: "1px solid var(--hairline)", borderRadius: 10,
+            outline: "none", font: "inherit", minHeight: 110,
+          }}
+        />
+      </label>
+      <button
+        type="submit"
+        disabled={!canSubmit}
+        className="card-lift"
+        style={{
+          padding: "12px 16px", fontSize: 14, fontWeight: 500,
+          background: status === "sent" ? "var(--good, #16a34a)" : "var(--accent)",
+          color: "white", border: "none", borderRadius: 10,
+          cursor: canSubmit ? "pointer" : "not-allowed",
+          opacity: canSubmit ? 1 : 0.55,
+          display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8,
+        }}
+      >
+        {status === "sending" ? "Sending…" : status === "sent" ? "Message sent ✓" : (<><Icon.send /> Send message</>)}
+      </button>
+      <div style={{ fontSize: 12, color: status === "error" ? "#d04a3a" : "var(--ink-3)", minHeight: 18 }}>
+        {status === "error" ? errorMsg : <>Messages are directed to <span className="mono">{RECEIVER_EMAIL}</span>.</>}
+      </div>
+    </form>
+  );
+}
+
 function Footer() {
+  const SOCIAL_ICONS = [
+    { label: "Email",    href: "mailto:" + RECEIVER_EMAIL,          Icon: Icon.mail },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/manthan7805", Icon: Icon.linkedin },
+    { label: "GitHub",   href: "https://github.com/manthanjha7",     Icon: Icon.github },
+  ];
   return (
     <footer id="reach" className="anchor m-pad-y-56" style={{ borderTop: "1px solid var(--hairline)", paddingTop: 56, paddingBottom: 56, marginTop: 40 }}>
       <SectionHead num="05" label="Reach out" />
-      <div className="flex items-start justify-between m-flex-col" style={{ gap: 32, flexWrap: "wrap" }}>
-        <div>
+      <div className="flex items-start justify-between m-flex-col" style={{ gap: 48, flexWrap: "wrap" }}>
+        <div style={{ flex: "1 1 360px", maxWidth: 480 }}>
           <div style={{ fontFamily: "var(--serif)", fontStyle: "italic", fontSize: 28, fontWeight: 400, letterSpacing: "-0.01em", marginTop: 0, lineHeight: 1.25, maxWidth: "26ch" }}>
-            If you scrolled this far, you might as well say hi.
+            Still reading? That means something clicked. Let's talk.
           </div>
-          <div style={{ marginTop: 14, color: "var(--ink-2)", fontSize: 15 }}>
-            Best way is{" "}
-            <a href="https://www.linkedin.com/in/manthan7805" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>LinkedIn</a>.
+
+          <div className="flex items-center" style={{ gap: 10, marginTop: 22, flexWrap: "wrap" }}>
+            <a
+              href={BOOK_URL}
+              target="_blank"
+              rel="noopener"
+              className="card-lift"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "10px 16px", borderRadius: 999,
+                background: "var(--accent)", color: "white",
+                fontSize: 13.5, fontWeight: 500, textDecoration: "none",
+              }}
+            >
+              <Icon.calendar /> book a meet
+            </a>
+            <a
+              href="https://www.linkedin.com/in/manthan7805"
+              target="_blank"
+              rel="noopener"
+              className="card-lift"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                padding: "10px 16px", borderRadius: 999,
+                background: "var(--card)", color: "var(--ink)",
+                border: "1px solid var(--hairline)",
+                fontSize: 13.5, fontWeight: 500, textDecoration: "none",
+              }}
+            >
+              <Icon.linkedin /> dm on linkedin
+            </a>
+          </div>
+
+          <div style={{ marginTop: 28, fontSize: 13, color: "var(--ink-3)" }}>or find me here</div>
+          <div className="flex items-center" style={{ gap: 8, marginTop: 10 }}>
+            {SOCIAL_ICONS.map(s => (
+              <a
+                key={s.label}
+                href={s.href}
+                target={s.href.startsWith("mailto") ? "_self" : "_blank"}
+                rel="noopener"
+                aria-label={s.label}
+                className="card-lift"
+                style={{
+                  width: 36, height: 36, borderRadius: 8,
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  background: "var(--card)", color: "var(--ink-2)",
+                  border: "1px solid var(--hairline)",
+                }}
+              >
+                <s.Icon />
+              </a>
+            ))}
           </div>
         </div>
 
-        <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 6, minWidth: 220 }}>
-          {SOCIALS.map(s => (
-            <li key={s.label}>
-              <a href={s.href} target="_blank" rel="noopener"
-                className="flex items-center justify-between"
-                style={{ padding: "6px 0", gap: 12, color: "var(--ink-2)", fontSize: 14 }}>
-                <span className="mono" style={{ color: "var(--ink-4)", width: 76, fontSize: 11 }}>{s.label}</span>
-                <span style={{ flex: 1 }}>{s.value}</span>
-                <Icon.arrow />
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div style={{ flex: "1 1 320px", maxWidth: 440 }}>
+          <div style={{ fontSize: 13, color: "var(--ink-3)", marginBottom: 12 }}>or send a message</div>
+          <ContactForm />
+        </div>
       </div>
 
       <div className="flex items-center justify-between" style={{ marginTop: 48, paddingTop: 18, borderTop: "1px solid var(--hairline-soft)", color: "var(--ink-3)", fontSize: 12, flexWrap: "wrap", gap: 12 }}>
