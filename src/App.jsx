@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo, useCallback } from "react"
 import { GraduationCap, Sparkles, Briefcase } from "lucide-react";
 import { PROJECTS, CaseStudyView, CSImage } from "./caseStudies.jsx";
 import { ARTICLES, ArticleView, ArticlesIndexView } from "./articles.jsx";
+import { SERIES, SeriesCard, SeriesView } from "./series.jsx";
 import { EncryptedText, MagneticButton, CometCard, BackgroundGradient, GlowingEffect } from "./effects.jsx";
 import manthanPhoto from "./manthan.jpg";
 import finrepLogo from "./logos/finrep.jpg";
@@ -1152,13 +1153,16 @@ function Achievements() {
    WRITING
 ============================================================ */
 
-function Writing({ onOpenArticle, onOpenArticles }) {
-  const featured = ARTICLES.slice(0, 3);
+function Writing({ onOpenArticle, onOpenArticles, onOpenSeries }) {
+  // Main page slot 3 is reserved for the Git series; the rest of the
+  // articles appear in the "All writing" overlay.
+  const featuredArticles = ARTICLES.slice(0, 2);
+  const featuredSeries = SERIES[0];
   return (
     <section id="writing" className="anchor m-pad-y-56" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <SectionHead num="05" label="Writing" action={{ label: "All writing", onClick: onOpenArticles }} />
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 16 }}>
-        {featured.map((a, i) => (
+        {featuredArticles.map((a, i) => (
           <button
             key={a.id}
             onClick={() => onOpenArticle(a.id)}
@@ -1188,6 +1192,7 @@ function Writing({ onOpenArticle, onOpenArticles }) {
             </div>
           </button>
         ))}
+        {featuredSeries && <SeriesCard series={featuredSeries} onClick={onOpenSeries} />}
       </div>
     </section>
   );
@@ -1792,10 +1797,12 @@ function App() {
   const [caseId, setCaseId] = useState(null);
   const [articleId, setArticleId] = useState(null);
   const [articlesOpen, setArticlesOpen] = useState(false);
+  const [seriesId, setSeriesId] = useState(null);
   const active = useActiveSection();
-  useJKNav(active, paletteOpen || !!caseId || !!articleId || articlesOpen);
+  useJKNav(active, paletteOpen || !!caseId || !!articleId || articlesOpen || !!seriesId);
 
   const currentArticle = ARTICLES.find(a => a.id === articleId) || null;
+  const currentSeries = SERIES.find(s => s.id === seriesId) || null;
 
   const projectList = PROJECTS || [];
   const currentProject = projectList.find(p => p.id === caseId) || null;
@@ -1844,7 +1851,7 @@ function App() {
         <Reveal><Achievements /></Reveal>
         <Reveal><GitHub /></Reveal>
         {/* <Reveal><Projects onOpenCase={(id) => setCaseId(id)} /></Reveal>  hidden - re-enable later */}
-        <Reveal><Writing onOpenArticle={setArticleId} onOpenArticles={() => setArticlesOpen(true)} /></Reveal>
+        <Reveal><Writing onOpenArticle={setArticleId} onOpenArticles={() => setArticlesOpen(true)} onOpenSeries={setSeriesId} /></Reveal>
         {/* <Reveal><Exploring /></Reveal>  hidden - re-enable later */}
         <Reveal><Footer /></Reveal>
       </main>
@@ -1864,6 +1871,11 @@ function App() {
         open={articlesOpen}
         onClose={() => setArticlesOpen(false)}
         onOpenArticle={(id) => { setArticlesOpen(false); setArticleId(id); }}
+        onOpenSeries={(id) => { setArticlesOpen(false); setSeriesId(id); }}
+      />
+      <SeriesView
+        series={currentSeries}
+        onClose={() => setSeriesId(null)}
       />
     </div>
   );
