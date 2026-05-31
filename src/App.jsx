@@ -6,7 +6,7 @@ import { EncryptedText, MagneticButton, CometCard, BackgroundGradient } from "./
 import manthanPhoto from "./manthan.jpg";
 import finrepLogo from "./logos/finrep.jpg";
 import tryoLogo from "./logos/tryo.jpg";
-import iitRoorkeeLogo from "./logos/iit-roorkee.jpg";
+import iitRoorkeeLogo from "./logos/iit-roorkee.png";
 
 /* ============================================================
    DATA
@@ -951,90 +951,93 @@ function TimelineItem({ item, index, total, forceOpen }) {
       onBlur={() => setHovered(false)}
       className="card-lift m-stack-1"
       style={{
-        display: "grid",
-        gridTemplateColumns: "48px 1fr auto",
-        gap: 18,
         padding: "20px 22px",
         border: "1px solid var(--hairline)",
         borderRadius: 12,
         background: "var(--card)",
-        alignItems: "start",
       }}
     >
-      <div style={{
-        width: 48, height: 48,
-        borderRadius: 10,
-        display: "flex", alignItems: "center", justifyContent: "center",
-        overflow: "hidden",
-        flexShrink: 0,
-      }}>
-        {item.logo ? (
-          <img src={item.logo} alt={item.company + " logo"}
-            style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
-        ) : null}
-      </div>
-      <div>
-        <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
-          {item.href ? (
-            <a href={item.href} target="_blank" rel="noopener" className="link-grow"
-              style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em", color: "var(--accent)" }}>
-              {item.company}
-            </a>
-          ) : (
-            <span style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em" }}>{item.company}</span>
+      <div className="flex items-center" style={{ gap: 18 }}>
+        <div style={{
+          width: 48, height: 48,
+          borderRadius: 10,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          overflow: "hidden",
+          flexShrink: 0,
+        }}>
+          {item.logo ? (
+            <img src={item.logo} alt={item.company + " logo"}
+              style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+          ) : null}
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div className="flex items-baseline" style={{ gap: 10, flexWrap: "wrap" }}>
+            {item.href ? (
+              <a href={item.href} target="_blank" rel="noopener" className="link-grow"
+                style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em", color: "var(--accent)" }}>
+                {item.company}
+              </a>
+            ) : (
+              <span style={{ fontSize: 18, fontWeight: 500, letterSpacing: "-0.01em" }}>{item.company}</span>
+            )}
+          </div>
+          <div style={{ color: "var(--ink-2)", marginTop: 4, fontSize: 14 }}>{item.role}</div>
+        </div>
+        <div className="flex items-center" style={{ gap: 10, flexShrink: 0 }}>
+          <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, whiteSpace: "nowrap" }}>{item.dates}</span>
+          {hasBullets && !forceOpen && (
+            <span aria-hidden style={{
+              color: "var(--ink-3)",
+              display: "inline-flex",
+              transform: open ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 180ms ease",
+            }}>
+              <Icon.chevron />
+            </span>
           )}
         </div>
-        <div style={{ color: "var(--ink-2)", marginTop: 4, fontSize: 14 }}>{item.role}</div>
-        {item.note && !hasBullets && <div style={{ color: "var(--ink-3)", marginTop: 6, fontSize: 13 }}>{item.note}</div>}
-        {hasBullets && (
-          <div style={{
+      </div>
+
+      {item.note && !hasBullets && (
+        <div style={{ color: "var(--ink-3)", marginTop: 10, fontSize: 13, paddingLeft: 66 }}>{item.note}</div>
+      )}
+
+      {hasBullets && (
+        <div style={{
+          display: "grid",
+          gridTemplateRows: open ? "1fr" : "0fr",
+          transition: "grid-template-rows 240ms ease, margin-top 240ms ease",
+          marginTop: open ? 14 : 0,
+          overflow: "hidden",
+        }}>
+          <ul style={{
+            minHeight: 0,
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            paddingLeft: 66,
             display: "grid",
-            gridTemplateRows: open ? "1fr" : "0fr",
-            transition: "grid-template-rows 240ms ease, margin-top 240ms ease",
-            marginTop: open ? 12 : 0,
-            overflow: "hidden",
+            gap: 8,
           }}>
-            <ul style={{
-              minHeight: 0,
-              listStyle: "none",
-              padding: 0,
-              margin: 0,
-              display: "grid",
-              gap: 8,
-            }}>
-              {item.bullets.map((b, j) => (
-                <li key={j} style={{
-                  position: "relative",
-                  paddingLeft: 14,
-                  color: "var(--ink-2)",
-                  fontSize: 13.5,
-                  lineHeight: 1.55,
-                }}>
-                  <span aria-hidden style={{
-                    position: "absolute", left: 0, top: "0.55em",
-                    width: 5, height: 5, borderRadius: "50%",
-                    background: "var(--ink-4)",
-                  }} />
-                  {b}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-      <div className="flex items-center" style={{ gap: 10, paddingTop: 4 }}>
-        <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, whiteSpace: "nowrap" }}>{item.dates}</span>
-        {hasBullets && !forceOpen && (
-          <span aria-hidden style={{
-            color: "var(--ink-3)",
-            display: "inline-flex",
-            transform: open ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 180ms ease",
-          }}>
-            <Icon.chevron />
-          </span>
-        )}
-      </div>
+            {item.bullets.map((b, j) => (
+              <li key={j} style={{
+                position: "relative",
+                paddingLeft: 14,
+                color: "var(--ink-2)",
+                fontSize: 13.5,
+                lineHeight: 1.55,
+              }}>
+                <span aria-hidden style={{
+                  position: "absolute", left: 0, top: "0.55em",
+                  width: 5, height: 5, borderRadius: "50%",
+                  background: "var(--ink-4)",
+                }} />
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </li>
   );
 }
