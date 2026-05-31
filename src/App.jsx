@@ -1501,7 +1501,7 @@ function Footer() {
     { label: "GitHub",   href: "https://github.com/manthanjha7",     Icon: Icon.github },
   ];
   return (
-    <footer id="reach" className="anchor m-pad-y-56" style={{ borderTop: "1px solid var(--hairline)", paddingTop: 56, paddingBottom: 56, marginTop: 40 }}>
+    <footer id="reach" className="anchor m-pad-y-56" style={{ paddingTop: 56, paddingBottom: 56, marginTop: 40 }}>
       <SectionHead num="06" label="Reach out" />
       <div className="flex items-start justify-between m-flex-col" style={{ gap: 48, flexWrap: "wrap" }}>
         <div style={{ flex: "1 1 360px", maxWidth: 480 }}>
