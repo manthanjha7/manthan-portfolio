@@ -964,11 +964,8 @@ function TimelineItem({ item, index, total, forceOpen }) {
       <div style={{
         width: 48, height: 48,
         borderRadius: 10,
-        border: "1px solid var(--hairline)",
-        background: "var(--paper-2)",
         display: "flex", alignItems: "center", justifyContent: "center",
         overflow: "hidden",
-        padding: 4, boxSizing: "border-box",
         flexShrink: 0,
       }}>
         {item.logo ? (
