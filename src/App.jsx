@@ -376,6 +376,11 @@ const Icon = {
       <path d="m6 9 6 6 6-6" />
     </svg>
   ),
+  x: (p) => (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" {...p}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  ),
 };
 
 const BOOK_URL = "https://cal.com/manthanjha";
@@ -516,90 +521,101 @@ function CredentialChip({ Icon, dot, label }) {
   );
 }
 
-function Hero({ onOpenAbout }) {
+function Hero() {
+  const clock = useClock();
+  const heroSocials = [
+    { label: "Email",    href: "mailto:" + RECEIVER_EMAIL,                Icon: Icon.mail },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/manthan7805", Icon: Icon.linkedin },
+    { label: "GitHub",   href: "https://github.com/manthanjha7",          Icon: Icon.github },
+    { label: "X",        href: "https://x.com/manthann_jha",              Icon: Icon.x },
+  ];
   return (
     <section id="hero" className="anchor m-pad-y-hero" style={{ paddingTop: 120, paddingBottom: 100 }}>
-      {/* Photo + bio + credentials + Know More */}
-      <div
-        className="fade-up m-stack-1"
-        style={{
-          marginTop: 0,
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 480px) minmax(0, 1fr)",
-          gap: 48,
-          alignItems: "center",
-        }}
-      >
-        <BackgroundGradient style={{ maxWidth: 480 }} radius={22}>
+      <div className="fade-up" style={{ maxWidth: 720 }}>
+        {/* Eyebrow row */}
+        <div className="flex items-center justify-between" style={{ marginBottom: 22 }}>
+          <span className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>Hey, I'm</span>
+          <span className="mono" style={{ fontSize: 12, color: "var(--ink-3)" }}>{clock}</span>
+        </div>
+
+        {/* Identity row: avatar + name + status */}
+        <div className="flex items-center" style={{ gap: 20, flexWrap: "wrap" }}>
           <img
             src={manthanPhoto}
             alt="Manthan Jha"
             style={{
-              display: "block",
-              width: "100%",
-              aspectRatio: "1/1",
+              width: 96, height: 96,
+              borderRadius: "50%",
               objectFit: "cover",
-              borderRadius: 22,
               border: "1px solid var(--hairline)",
+              flexShrink: 0,
             }}
           />
-        </BackgroundGradient>
-
-        <div>
-          <p style={{
-            margin: 0,
-            fontSize: "clamp(19px, 1.7vw, 22px)",
-            lineHeight: 1.6,
-            letterSpacing: "-0.01em",
-            color: "var(--ink-2)",
-            maxWidth: 52 + "ch",
-            fontStyle: "italic",
-            fontFamily: "var(--serif)",
-            fontWeight: 400,
-          }}>
-            <EncryptedText text="Hey, I'm Manthan, a 4th-year UG at IIT Roorkee, currently working as an AI PM at " />
-            <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}><EncryptedText text="Finrep.ai" /></a>
-            <EncryptedText text=" (" />
-            <a href="https://www.accel.com/" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}><EncryptedText text="Accel" /></a>
-            <EncryptedText text=" Backed)." />
-          </p>
-
-          <div
-            style={{
-              marginTop: 28,
-              display: "grid",
-              gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-              gap: 10,
-              maxWidth: 560,
-            }}
-          >
-            {CREDENTIALS.map((c, i) => <CredentialChip key={i} Icon={c.Icon} dot={c.dot} label={c.label} />)}
-          </div>
-
-          {/* top contact row — text-only ghost buttons */}
-          <div className="flex" style={{ flexWrap: "wrap", gap: 8, marginTop: 16 }}>
-            {SOCIALS.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                target={s.href.startsWith("mailto") ? "_self" : "_blank"}
-                rel="noopener"
-                className="btn-ghost"
-              >
-                {s.label}
-              </a>
-            ))}
-          </div>
-
-          <div className="flex items-center" style={{ gap: 20, marginTop: 28, flexWrap: "wrap" }}>
-            <MagneticButton onClick={onOpenAbout} className="btn-cta">
-              Know More <Icon.arrow className="cta-arrow" />
-            </MagneticButton>
-            {/* <a href="#projects" className="link-grow" style={{ fontSize: 14, color: "var(--ink-2)" }}>
-              See selected work
-            </a> */}
+          <div style={{ minWidth: 0 }}>
+            <h1 style={{
+              margin: 0,
+              fontSize: "clamp(32px, 4vw, 44px)",
+              fontWeight: 600,
+              letterSpacing: "-0.025em",
+              lineHeight: 1.05,
+              color: "var(--ink)",
+            }}>
+              Manthan Jha
+            </h1>
+            <div style={{ marginTop: 8, fontSize: 14, color: "var(--ink-2)" }}>
+              20, AI Product Manager, IIT Roorkee
+            </div>
           </div>
         </div>
+
+        {/* Action row */}
+        <div className="flex items-center" style={{ gap: 10, marginTop: 22, flexWrap: "wrap" }}>
+          <a
+            href="/Manthan_Jha_Resume.pdf"
+            target="_blank"
+            rel="noopener"
+            className="card-lift"
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              padding: "10px 16px", borderRadius: 999,
+              background: "var(--accent)", color: "white",
+              fontSize: 13.5, fontWeight: 500, textDecoration: "none",
+            }}
+          >
+            <Icon.doc /> Resume
+          </a>
+          {heroSocials.map(s => (
+            <a
+              key={s.label}
+              href={s.href}
+              target={s.href.startsWith("mailto") ? "_self" : "_blank"}
+              rel="noopener"
+              aria-label={s.label}
+              className="card-lift"
+              style={{
+                width: 36, height: 36, borderRadius: 8,
+                display: "inline-flex", alignItems: "center", justifyContent: "center",
+                background: "var(--card)", color: "var(--ink-2)",
+                border: "1px solid var(--hairline)",
+              }}
+            >
+              <s.Icon />
+            </a>
+          ))}
+        </div>
+
+        {/* TL;DR */}
+        <p style={{
+          marginTop: 28,
+          marginBottom: 0,
+          fontSize: 16,
+          lineHeight: 1.65,
+          color: "var(--ink-2)",
+          maxWidth: 640,
+        }}>
+          <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, letterSpacing: "0.04em" }}>TL;DR — </span>
+          Product strategy intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) — helped scale $0 → $100K ARR in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (40% CAC reduction). 1st place at IIT Roorkee's Tech GC (~INR 18L projected savings). IIT Roorkee, Integrated M.Tech.
+        </p>
       </div>
     </section>
   );
@@ -922,6 +938,15 @@ function Projects({ onOpenCase }) {
 /* ============================================================
    EXPERIENCE
 ============================================================ */
+
+function useClock() {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
+}
 
 function useIsTouchDevice() {
   const [isTouch, setIsTouch] = useState(false);
@@ -1743,12 +1768,11 @@ function CommandPalette({ open, onClose, openCase }) {
 function App() {
   const [theme, setTheme] = useTheme();
   const [paletteOpen, setPaletteOpen] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false);
   const [caseId, setCaseId] = useState(null);
   const [articleId, setArticleId] = useState(null);
   const [articlesOpen, setArticlesOpen] = useState(false);
   const active = useActiveSection();
-  useJKNav(active, paletteOpen || aboutOpen || !!caseId || !!articleId || articlesOpen);
+  useJKNav(active, paletteOpen || !!caseId || !!articleId || articlesOpen);
 
   const currentArticle = ARTICLES.find(a => a.id === articleId) || null;
 
@@ -1793,7 +1817,7 @@ function App() {
       <TopNav active={active} onOpenPalette={() => setPaletteOpen(true)} theme={theme} setTheme={setTheme} />
 
       <main className="mx-auto m-pad-x" style={{ maxWidth: 1180, padding: "0 28px" }}>
-        <Hero onOpenAbout={() => setAboutOpen(true)} />
+        <Hero />
         <Reveal><Experience /></Reveal>
         <Reveal><Education /></Reveal>
         <Reveal><Achievements /></Reveal>
@@ -1805,7 +1829,6 @@ function App() {
       </main>
 
       <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} openCase={(id) => setCaseId(id)} />
-      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
       <CaseStudyView
         project={currentProject}
         onClose={() => setCaseId(null)}
