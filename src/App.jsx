@@ -1034,7 +1034,7 @@ function TimelineList({ items }) {
 
 function Experience() {
   return (
-    <section id="experience" className="anchor" style={{ paddingTop: 80, paddingBottom: 80 }}>
+    <section id="experience" className="anchor m-pad-y-56" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <SectionHead num="01" label="Experience" action={{ label: "View LinkedIn", href: "https://www.linkedin.com/in/manthan7805" }} />
       <TimelineList items={EXPERIENCE} />
     </section>
@@ -1043,7 +1043,7 @@ function Experience() {
 
 function Education() {
   return (
-    <section id="education" className="anchor" style={{ paddingTop: 80, paddingBottom: 80 }}>
+    <section id="education" className="anchor m-pad-y-56" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <SectionHead num="02" label="Education" />
       <TimelineList items={EDUCATION} />
     </section>
