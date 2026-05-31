@@ -6,7 +6,7 @@ import { EncryptedText, MagneticButton, CometCard, BackgroundGradient } from "./
 import manthanPhoto from "./manthan.jpg";
 import finrepLogo from "./logos/finrep.jpg";
 import tryoLogo from "./logos/tryo.jpg";
-import iitRoorkeeLogo from "./logos/iit-roorkee.png";
+import iitRoorkeeLogo from "./logos/iit-roorkee.jpg";
 
 /* ============================================================
    DATA
