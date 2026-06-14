@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { GraduationCap, Sparkles, Briefcase } from "lucide-react";
-import { PROJECTS, CaseStudyView, CSImage } from "./caseStudies.jsx";
+import { PROJECTS, CaseStudyView, CSImage, CSVideoFile } from "./caseStudies.jsx";
 import { ARTICLES, ArticleView, ArticlesIndexView } from "./articles.jsx";
 import { SERIES, SeriesCard, SeriesView } from "./series.jsx";
 import { EncryptedText, MagneticButton, CometCard, BackgroundGradient, GlowingEffect } from "./effects.jsx";
@@ -57,10 +57,10 @@ const SECTIONS = [
   { id: "education",    num: "02", label: "Education" },
   { id: "achievements", num: "03", label: "Achievements" },
   { id: "github",       num: "04", label: "GitHub" },
-  // { id: "projects",  num: "05", label: "Projects" },   // hidden - re-enable later (also uncomment <Projects/> in <main> + restore num)
-  { id: "writing",      num: "05", label: "Writing" },
+  { id: "projects",     num: "05", label: "Projects" },
+  { id: "writing",      num: "06", label: "Writing" },
   // { id: "exploring", num: "07", label: "Exploring" }, // hidden - re-enable later (also uncomment <Exploring/> in <main> + restore num)
-  { id: "reach",        num: "06", label: "Reach out" },
+  { id: "reach",        num: "07", label: "Reach out" },
 ];
 
 const GH_USERNAME = "manthanjha7";
@@ -849,7 +849,7 @@ function Timeline({ items }) {
 function ProjectCard({ project, n, onOpen }) {
   return (
     <article
-      className="card-lift m-stack-1"
+      className="project-lift m-stack-1"
       style={{
         display: "grid",
         gridTemplateColumns: "minmax(0, 0.95fr) minmax(0, 1.05fr)",
@@ -918,7 +918,9 @@ function ProjectCard({ project, n, onOpen }) {
         }}
       >
         <CometCard>
-          <CSImage label={project.heroLabel || project.name} aspect="16/10" />
+          {project.heroVideo
+            ? <CSVideoFile src={project.heroVideo} aspect="16/10" />
+            : <CSImage label={project.heroLabel || project.name} aspect="16/10" />}
         </CometCard>
       </button>
     </article>
@@ -947,7 +949,7 @@ function Projects({ onOpenCase }) {
   const list = PROJECTS || [];
   return (
     <section id="projects" className="anchor m-pad-y-56" style={{ paddingTop: 80, paddingBottom: 80 }}>
-      <SectionHead num="04" label="Projects" kicker={list.length + " case studies"} />
+      <SectionHead num="05" label="Projects" kicker={list.length + " case studies"} />
       <div>
         {list.map((p, i) => (
           <ProjectCard key={p.id} project={p} n={i} onOpen={onOpenCase} />
@@ -1610,12 +1612,11 @@ function CommandPalette({ open, onClose, openCase }) {
     SECTIONS.forEach(s => items.push({
       kind: "Section", icon: Icon.hash, label: s.label, hint: s.num, action: () => { scrollToSection(s.id); }
     }));
-    // Projects hidden for now - palette won't list them. Re-enable when <Projects/> comes back.
-    // const WORK_LIST = PROJECTS || [];
-    // WORK_LIST.forEach(w => items.push({
-    //   kind: "Project", icon: Icon.spark, label: w.name, hint: w.tag || "",
-    //   action: () => { scrollToSection("projects"); if (typeof openCase === "function") openCase(w.id); }
-    // }));
+    const WORK_LIST = PROJECTS || [];
+    WORK_LIST.forEach(w => items.push({
+      kind: "Project", icon: Icon.spark, label: w.name, hint: w.tag || "",
+      action: () => { scrollToSection("projects"); if (typeof openCase === "function") openCase(w.id); }
+    }));
     SOCIALS.forEach(s => items.push({
       kind: "Link", icon: Icon.link, label: s.label, hint: s.value,
       action: () => { window.open(s.href, s.href.startsWith("mailto") ? "_self" : "_blank"); }
@@ -1850,7 +1851,7 @@ function App() {
         <Reveal><Education /></Reveal>
         <Reveal><Achievements /></Reveal>
         <Reveal><GitHub /></Reveal>
-        {/* <Reveal><Projects onOpenCase={(id) => setCaseId(id)} /></Reveal>  hidden - re-enable later */}
+        <Reveal><Projects onOpenCase={(id) => setCaseId(id)} /></Reveal>
         <Reveal><Writing onOpenArticle={setArticleId} onOpenArticles={() => setArticlesOpen(true)} onOpenSeries={setSeriesId} /></Reveal>
         {/* <Reveal><Exploring /></Reveal>  hidden - re-enable later */}
         <Reveal><Footer /></Reveal>

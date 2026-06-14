@@ -40,6 +40,7 @@
   --good: #1E8E5A;
   --shadow-card: 0 1px 0 rgba(20,20,20,0.04), 0 8px 24px -12px rgba(20,20,20,0.12);
   --shadow-pop: 0 24px 60px -20px rgba(20,20,20,0.30), 0 2px 8px rgba(20,20,20,0.08);
+  --shadow-raise: 0 18px 22px -20px rgba(20,20,20,0.30);
 
   --sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -63,6 +64,7 @@ html[data-theme="dark"] {
   --good: #4FD18A;
   --shadow-card: 0 1px 0 rgba(0,0,0,0.40), 0 8px 24px -12px rgba(0,0,0,0.50);
   --shadow-pop: 0 24px 60px -20px rgba(0,0,0,0.80), 0 2px 8px rgba(0,0,0,0.40);
+  --shadow-raise: 0 18px 24px -21px rgba(0,0,0,0.70);
 }
 
 * { box-sizing: border-box; }
@@ -171,6 +173,17 @@ button { font-family: inherit; }
   transform: translateY(-3px);
   box-shadow: var(--shadow-card);
   border-color: var(--accent);
+}
+
+/* Raise effect for wide, borderless rows: lift + a shadow biased downward
+   (minimal horizontal reach) so the sides never look congested. */
+.project-lift {
+  transition: transform 150ms cubic-bezier(.2,.7,.2,1),
+              box-shadow 150ms cubic-bezier(.2,.7,.2,1);
+}
+.project-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-raise);
 }
 
 .accent-fade-target { transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, transform 220ms ease; }

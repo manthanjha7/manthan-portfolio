@@ -151,6 +151,126 @@ const PROJECTS = [
     },
   },
 
+  /* ---------------- ASC CODIFICATION LIBRARY ---------------- */
+  {
+    id: "asc",
+    name: "ASC Library",
+    one: "A searchable library of every FASB accounting standard, built right inside Finrep, so nobody has to leave to look one up.",
+    tag: "Live",
+    heroLabel: "ASC Library · drill-column navigation",
+    heroVideo: "/asc-demo.mp4",
+    caseStudy: {
+      title: "ASC Library",
+      meta: {
+        items: [
+          { k: "My Role",  v: "Product Manager (built it end-to-end)" },
+          { k: "Timeline", v: "2 weeks" },
+          { k: "Status",   v: "Live · v1 in production" },
+          { k: "Impact",   v: "A customer could finally drop the separate paid tool they were using to look up standards and do it all inside Finrep instead." },
+        ],
+        heading: "Overview",
+        bodies: [
+          "Finrep is meant to be the one place finance teams do all their reporting work. But the moment someone needed to actually read an accounting standard, they had to leave Finrep and look it up somewhere else.",
+          "This came as a customer request. They wanted to access accounting standards right inside the app, which they were doing on some other platform until now. I took it from the request all the way to execution.",
+        ],
+      },
+      blocks: [
+        { type: "videoFile", src: "/asc-demo.mp4", aspect: "1112/720", caption: "Here is the actual product running on my local." },
+
+        /* ---- PROBLEM ---- */
+        { type: "heading", text: "The rules accounting runs on lived outside the product." },
+        { type: "body",    text: "Any accounting work has to follow a specific standard, and the SEC reporting team is checking those standards the whole time they work. Leaving Finrep to do that was not really the painful part. Where they had to go was. The standards live on the FASB website, a government site that is slow, clunky, and every now and then just down. The only other option was a paid research tool. So checking a single rule meant either wrestling with that site or paying for a separate subscription, over and over." },
+        { type: "flow",    steps: [
+          { label: "Hit a rule to check",                    state: "idle" },
+          { label: "Leave for the FASB site or a paid tool", state: "blocked" },
+          { label: "Get back to work",                       state: "active" },
+        ]},
+        { type: "body",    text: "There was a bigger reason too. We want Finrep to be the operating system for the SEC reporting team, the one place they run everything. A piece of work this central could not keep living on someone else's website." },
+
+        /* ---- HOW I BUILT IT ---- */
+        { type: "heading", text: "How I actually built this." },
+        { type: "body",    text: "I did not just hand this to engineers and wait. I ran it end to end, from the moment the request landed to the day it went live. Here is the path it took." },
+        { type: "flowCards", items: [
+          { title: "Define", icon: "define", sub: "Take the request and work out what is really needed" },
+          { title: "Spec",   icon: "spec",   sub: "Write the PRD, then cut it to a V1" },
+          { title: "Design", icon: "design", sub: "Build the prototype in Claude Design" },
+          { title: "Build",  icon: "build",  sub: "Write the TRD, then build with Claude Code" },
+          { title: "Ship",   icon: "ship",   sub: "Debug, fix, and push to production", state: "success" },
+        ]},
+        { type: "steps", items: [
+          { title: "The request came in from the customer through our customer relations team" },
+          { title: "Worked out what they actually needed, and scoped what was in and out" },
+          { title: "Wrote the PRD" },
+          { title: "Cut it down to a focused first version" },
+          { title: "Built the design prototype", tool: "Claude Design" },
+          { title: "Wrote the technical spec (TRD)" },
+          { title: "Handed the design and the TRD over to build", tool: "Claude Code" },
+          { title: "Ran the debug loop: test, fix, repeat" },
+          { title: "Shipped it to production" },
+        ]},
+
+        /* ---- PROCESS ---- */
+        { type: "heading", text: "Decide what the first version would not do." },
+        { type: "body",    text: "The full set of standards is huge, so the real call was what to build right now and what to leave for later. I kept v1 to the basics done well, and parked the smart stuff for when it could be done properly." },
+        { type: "cards3",  items: [
+          { title: "What I shipped",      body: "All the guidance that lives on the FASB website now lives inside the product. Every standard, the current guidance and the transition guidance, searchable by code or keyword, with a glossary of terms and a link back to the official source on each one." },
+          { title: "Left for the future", body: "Putting an agent on top of it so you can just ask questions in plain English. That is genuinely powerful, but it needs a proper engine and real engineering bandwidth, so it is one for the future." },
+        ]},
+
+        { type: "heading", text: "Get 36,000 standards out of a site that blocks scrapers." },
+        { type: "body",    text: "The FASB website actively blocks scrapers, so I could not just point a normal one at it and walk away. I worked the whole path myself: capture the pages as raw HTML, run them through a script I wrote to sort everything into the right order (Topic, then Subtopic, then Section, then Paragraph), and load the whole thing into the database once, saved as a single file the team could restore anywhere. Getting that script right took a lot of tries. The HTML on the FASB site is messy and inconsistent, the way government websites usually are, so it kept missing things or tripping over pages that were formatted a little differently. I kept fixing it until it pulled everything in cleanly." },
+        { type: "flowCards", items: [
+          { title: "Capture", icon: "capture", sub: "Save the pages as raw HTML, past the scraper block",       state: "neutral" },
+          { title: "Parse",   icon: "parse",   sub: "A script sorts the HTML into the four levels",             state: "neutral" },
+          { title: "Seed",    icon: "seed",    sub: "Load it once, save it as a file we can restore anywhere",  state: "success" },
+        ]},
+        { type: "body",    text: "The best decision here was not building anything new. The four levels fit neatly into a structure the backend already had, where each item just points to the one above it. So there were no new database tables and nothing extra to keep in sync. The whole thing reused what was already there." },
+
+        /* ---- WHAT I MADE ---- */
+        { type: "heading", text: "One tree, four levels, and it stays fast." },
+        { type: "body",    text: "The library opens as a set of columns you move through: pick a category, then a Topic, then a Subtopic, then a Section, until you land on the exact paragraph. It only loads what you click into, so even with tens of thousands of standards it stays quick. You can search by a standard's code or by plain keywords, and every paragraph shows both its current and transition guidance with a link back to the official FASB page." },
+        { type: "imageGrid", cols: 2, items: [
+          { label: "Drilling down the columns from topic to section", src: "/asc-browse.png", caption: "Drilling down the columns, from topic to subtopic to section." },
+          { label: "Reading a standard with its guidance and links", src: "/asc-read.png", caption: "Reading a standard, with its guidance and clickable cross-links." },
+        ]},
+        { type: "cards3",  items: [
+          { title: "Master glossary",     body: "Every defined accounting term in one searchable list, linked from the standards that use it." },
+          { title: "Recent updates feed", body: "A live list of the latest changes FASB publishes, so the team sees new ones without going looking for them." },
+          { title: "Summarize in Fina",   body: "One click sends any update straight into Fina, Finrep's AI assistant, ready to explain it in plain English." },
+        ]},
+
+        { type: "heading", text: "Shipping it meant a clean handoff, not a hand-wave." },
+        { type: "body",    texts: [
+          "A demo running on my laptop is not the same as something live in production, and the gap between the two is where things usually break. So I wrote the full plan for actually shipping it: how to move all the data into production safely, in one pass, and without touching the other data already sitting in the same database.",
+          "On the front end, I reused the pieces Finrep already runs in production instead of shipping my own copies, and I gave every standard its own proper web address so anyone can link straight to it.",
+          "That last part shows up in the web addresses. In the early build the links were throwaway. Now every topic, subtopic, section, and paragraph has its own clean address you can share.",
+        ]},
+        { type: "table", headers: ["Early build", "In production"], rows: [
+          ["/#606-10",        "/asc-library/606-10"],
+          ["/#606-10-50",     "/asc-library/606-10-50"],
+          ["/#606-10-50-1",   "/asc-library/606-10-50-1"],
+        ]},
+
+        /* ---- TECH STACK ---- */
+        { type: "heading", text: "What it is built on." },
+        { type: "stack", groups: [
+          { label: "Frontend",       items: ["Next.js 15", "React 19", "TypeScript", "Tailwind CSS", "TanStack Query"] },
+          { label: "Backend",        items: ["Django 5", "Django REST Framework", "Python 3.12", "Celery"] },
+          { label: "Data",           items: ["PostgreSQL 16", "pgvector", "Redis"] },
+          { label: "Infrastructure", items: ["Docker", "docker-compose"] },
+          { label: "Tooling",        items: ["Claude Design", "Claude Code", "Custom FASB scraper"] },
+        ]},
+
+        /* ---- IMPACT ---- */
+        { type: "impact", items: [
+          { stat: "1 paid tool", label: "The customer dropped it and moved everything into Finrep" },
+          { stat: "End to end",  label: "I took it from the first request all the way to production, on my own" },
+          { stat: "35,941",      label: "standards searchable inside the product, plus 1,379 glossary terms" },
+        ]},
+      ],
+    },
+  },
+
   /* ---------------- SECTION 16 PLATFORM ---------------- */
   {
     id: "section16",
@@ -329,7 +449,7 @@ function CSBody({ text, texts }) {
   return (
     <div style={{ display: "grid", gap: 14 }}>
       {arr.map((t, i) => (
-        <p key={i} style={{ margin: 0, fontSize: 16, lineHeight: 1.65, color: csInk2, maxWidth: 72 + "ch" }}>{t}</p>
+        <p key={i} style={{ margin: 0, fontSize: 16, lineHeight: 1.65, color: csInk2 }}>{t}</p>
       ))}
     </div>
   );
@@ -367,7 +487,7 @@ function CSCards3({ items }) {
   return (
     <div className="m-stack-1" style={{
       display: "grid",
-      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+      gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))`,
       gap: 16,
     }}>
       {items.map((it, i) => (
@@ -391,9 +511,17 @@ function CSImageGrid({ items, cols = 2 }) {
       display: "grid",
       gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
       gap: 16,
+      alignItems: "start",
     }}>
       {items.map((it, i) => (
-        <CSImage key={i} label={it.label} aspect={it.aspect || "4/3"} frame={true} />
+        <CSImage
+          key={i}
+          label={it.label}
+          src={it.src}
+          caption={it.caption}
+          aspect={it.aspect || "4/3"}
+          frame={true}
+        />
       ))}
     </div>
   );
@@ -435,6 +563,66 @@ function CSFlow({ steps }) {
   );
 }
 
+const FLOW_ICONS = {
+  capture: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+      <path d="M14 3v6h6" />
+      <path d="m9 13-2 2 2 2" />
+      <path d="m13 13 2 2-2 2" />
+    </svg>
+  ),
+  parse: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="9" y="3" width="6" height="4" rx="1" />
+      <rect x="3" y="17" width="6" height="4" rx="1" />
+      <rect x="15" y="17" width="6" height="4" rx="1" />
+      <path d="M12 7v3M6 17v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2" />
+    </svg>
+  ),
+  seed: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <ellipse cx="12" cy="5" rx="8" ry="3" />
+      <path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
+      <path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6" />
+    </svg>
+  ),
+  define: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+      <rect x="9" y="3" width="6" height="4" rx="1" />
+      <path d="m9 14 2 2 4-4" />
+    </svg>
+  ),
+  spec: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
+      <path d="M14 3v6h6" />
+      <path d="M9 13h6M9 17h4" />
+    </svg>
+  ),
+  design: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 19l7-7a2.12 2.12 0 0 0-3-3l-7 7" />
+      <path d="M9 16l-2.5.5L7 14" />
+      <path d="M5 21c1.5 0 2.5-1 2.5-2.5S6.5 16 5 16s-1.5 1-1.5 2.5S3.5 21 5 21z" />
+    </svg>
+  ),
+  build: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m8 9-3 3 3 3" />
+      <path d="m16 9 3 3-3 3" />
+      <path d="m13 7-2 10" />
+    </svg>
+  ),
+  ship: (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3 19 7v10l-7 4-7-4V7z" />
+      <path d="m8 12 3 3 5-6" />
+    </svg>
+  ),
+};
+
 function CSFlowCards({ items }) {
   const tone = (s) => {
     if (s === "danger")  return { border: "color-mix(in oklab, #D04A3A 50%, var(--hairline))", text: "#D04A3A" };
@@ -461,9 +649,12 @@ function CSFlowCards({ items }) {
               minHeight: 140,
             }}>
               <div style={{
-                height: 56, borderRadius: 8, background: csPaper2, border: "1px dashed " + csHair,
-                display: "flex", alignItems: "center", justifyContent: "center", color: csInk4, fontSize: 11,
-              }} className="mono">illustration</div>
+                height: 56, borderRadius: 8, background: csPaper2, border: "1px solid " + csHair,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: it.icon && FLOW_ICONS[it.icon] ? t.text : csInk4, fontSize: 11,
+              }} className={it.icon && FLOW_ICONS[it.icon] ? "" : "mono"}>
+                {it.icon && FLOW_ICONS[it.icon] ? FLOW_ICONS[it.icon] : "illustration"}
+              </div>
               <div style={{ fontSize: 14, fontWeight: 600, color: t.text, letterSpacing: "-0.005em", textAlign: "center" }}>{it.title}</div>
               {it.sub && <div style={{ fontSize: 12, color: csInk3, textAlign: "center", lineHeight: 1.45 }}>{it.sub}</div>}
             </div>
@@ -485,6 +676,68 @@ function CSQuote({ text }) {
       color: csInk,
       lineHeight: 1.5,
     }}>{text}</div>
+  );
+}
+
+function CSSteps({ items }) {
+  return (
+    <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: 0 }}>
+      {items.map((it, i) => {
+        const last = i === items.length - 1;
+        return (
+          <li key={i} style={{ display: "grid", gridTemplateColumns: "auto 1fr", columnGap: 18, alignItems: "start" }}>
+            {/* number + connector rail */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", alignSelf: "stretch" }}>
+              <div style={{
+                width: 30, height: 30, borderRadius: 999, flexShrink: 0,
+                border: "1.5px solid " + csHair, background: csPaper2,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: 13, fontWeight: 600, color: csInk,
+              }} className="mono">{i + 1}</div>
+              {!last && <div style={{ width: 1.5, flex: 1, minHeight: 16, background: csHair, marginTop: 4, marginBottom: 4 }} />}
+            </div>
+            {/* step content */}
+            <div style={{ paddingBottom: last ? 0 : 18, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, flexWrap: "wrap", paddingTop: 4 }}>
+              <span style={{ fontSize: 15.5, lineHeight: 1.5, color: csInk2 }}>{it.title}</span>
+              {it.tool && (
+                <span className="mono" style={{
+                  flexShrink: 0, fontSize: 11, letterSpacing: "0.02em",
+                  padding: "4px 10px", borderRadius: 999,
+                  border: "1px solid " + csHair, background: csCard, color: csInk,
+                }}>{it.tool}</span>
+              )}
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
+function CSStack({ groups }) {
+  return (
+    <div style={{ display: "grid", gap: 18 }}>
+      {groups.map((g, i) => (
+        <div key={i} className="m-stack-1" style={{
+          display: "grid",
+          gridTemplateColumns: "minmax(120px, 160px) 1fr",
+          gap: 24,
+          alignItems: "center",
+          paddingBottom: i === groups.length - 1 ? 0 : 18,
+          borderBottom: i === groups.length - 1 ? "none" : "1px solid " + csHair,
+        }}>
+          <div style={{ fontSize: 13.5, fontWeight: 600, color: csInk3, letterSpacing: "0.01em" }}>{g.label}</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            {g.items.map((it, j) => (
+              <span key={j} style={{
+                fontSize: 13, padding: "6px 12px", borderRadius: 999,
+                border: "1px solid " + csHair, background: csPaper2, color: csInk,
+              }}>{it}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -569,6 +822,69 @@ function CSVideo({ youtubeId, src, title, caption, aspect = "16/9" }) {
         <figcaption style={{
           marginTop: 12, fontSize: 13, color: csInk3, lineHeight: 1.55,
         }}>{caption}</figcaption>
+      )}
+    </figure>
+  );
+}
+
+function CSVideoFile({ src, aspect = "16/9", caption, frame = true, poster }) {
+  // Self-hosted video that behaves like a GIF: looped, muted, inline, NO controls.
+  // Plays only while in the viewport (IntersectionObserver) and pauses when scrolled
+  // away - no human intervention, no wasted decoding off-screen.
+  const videoRef = csUseRef(null);
+
+  csUseEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      // Fallback: just play.
+      el.play().catch(() => {});
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.play().catch(() => {});
+          } else {
+            el.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [src]);
+
+  return (
+    <figure style={{ margin: 0 }}>
+      <div className={frame ? "m-frame-tight" : ""} style={frame ? csImageFrame : { borderRadius: 14, overflow: "hidden" }}>
+        <video
+          ref={videoRef}
+          src={src}
+          poster={poster}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          tabIndex={-1}
+          style={{
+            display: "block",
+            width: "100%",
+            height: "auto",
+            borderRadius: 8,
+            aspectRatio: aspect,
+            objectFit: "cover",
+            background: csCard,
+            pointerEvents: "none",
+          }}
+        />
+      </div>
+      {caption && (
+        <figcaption style={{ marginTop: 12, fontSize: 13, color: csInk3, lineHeight: 1.55 }}>{caption}</figcaption>
       )}
     </figure>
   );
@@ -663,10 +979,13 @@ function renderBlock(b, i) {
     case "flow":        return <CSFlow key={i} steps={b.steps} />;
     case "flowCards":   return <CSFlowCards key={i} items={b.items} />;
     case "quote":       return <CSQuote key={i} text={b.text} />;
+    case "steps":       return <CSSteps key={i} items={b.items} />;
+    case "stack":       return <CSStack key={i} groups={b.groups} />;
     case "impact":      return <CSImpact key={i} items={b.items} />;
     case "testimonial": return <CSTestimonial key={i} {...b} />;
     case "code":        return <CSCode key={i} code={b.code} lang={b.lang} caption={b.caption} />;
     case "video":       return <CSVideo key={i} youtubeId={b.youtubeId} src={b.src} title={b.title} caption={b.caption} aspect={b.aspect} />;
+    case "videoFile":   return <CSVideoFile key={i} src={b.src} aspect={b.aspect} caption={b.caption} frame={b.frame !== false} poster={b.poster} />;
     case "table":       return <CSTable key={i} headers={b.headers} rows={b.rows} />;
     case "spacer":      return <div key={i} style={{ height: b.h || 32 }} />;
     default:            return null;
@@ -740,8 +1059,8 @@ function CaseStudyView({ project, onClose, onNext }) {
       {/* scroll container */}
       <div ref={scrollRef} className="scroll-thin" style={{ overflowY: "auto", flex: 1 }}>
         <article className="m-pad-x" style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 28px 80px" }}>
-          {/* Hero: first block is hero image */}
-          {cs.blocks[0] && cs.blocks[0].type === "hero" && (
+          {/* Hero: first block is hero image or a hero demo video */}
+          {cs.blocks[0] && (cs.blocks[0].type === "hero" || cs.blocks[0].type === "videoFile") && (
             <div style={{ marginBottom: 48 }}>
               {renderBlock(cs.blocks[0], "hero-0")}
             </div>
@@ -762,8 +1081,15 @@ function CaseStudyView({ project, onClose, onNext }) {
           <CSMeta {...cs.meta} />
 
           {/* Remaining blocks */}
-          <div style={{ marginTop: 56, display: "grid", gap: 40 }}>
-            {cs.blocks.slice(1).map((b, i) => renderBlock(b, i + 1))}
+          <div style={{ marginTop: 56, display: "grid" }}>
+            {cs.blocks.slice(1).map((b, i) => {
+              const idx = i + 1;
+              const prev = cs.blocks[idx - 1];
+              // A heading should hug whatever follows it (its own section content);
+              // everything else gets the full section gap.
+              const mt = idx === 1 ? 0 : (prev && prev.type === "heading" ? 16 : 40);
+              return <div key={idx} style={{ marginTop: mt }}>{renderBlock(b, idx)}</div>;
+            })}
           </div>
 
           {/* Next case study */}
@@ -791,4 +1117,4 @@ function CaseStudyView({ project, onClose, onNext }) {
    EXPORTS
 ============================================================ */
 
-export { PROJECTS, CaseStudyView, CSImage, renderBlock };
+export { PROJECTS, CaseStudyView, CSImage, CSVideoFile, renderBlock };
