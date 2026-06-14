@@ -69,7 +69,7 @@ const csImageFrame = {
    Each one carries a caseStudy = { title, meta, blocks: [...] }
 ============================================================ */
 
-const PROJECTS = [
+const ALL_PROJECTS = [
   /* ---------------- FINA - full case study ---------------- */
   {
     id: "fina",
@@ -155,6 +155,7 @@ const PROJECTS = [
   {
     id: "asc",
     name: "ASC Library",
+    published: true,
     one: "A searchable library of every FASB accounting standard, built right inside Finrep, so nobody has to leave to look one up.",
     tag: "Live",
     heroLabel: "ASC Library · drill-column navigation",
@@ -365,6 +366,10 @@ const PROJECTS = [
     },
   },
 ];
+
+/* Only published projects are shown publicly. The rest stay here as drafts
+   (add `published: true` to a project to make it live). */
+const PROJECTS = ALL_PROJECTS.filter((p) => p.published);
 
 /* ============================================================
    BLOCK COMPONENTS

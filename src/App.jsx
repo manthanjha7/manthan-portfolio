@@ -1809,7 +1809,8 @@ function App() {
   const currentProject = projectList.find(p => p.id === caseId) || null;
   const nextProject = currentProject ? (() => {
     const idx = projectList.findIndex(p => p.id === caseId);
-    return projectList[(idx + 1) % projectList.length];
+    const next = projectList[(idx + 1) % projectList.length];
+    return next && next.id !== caseId ? next : null;
   })() : null;
 
   // Listen for palette-toggled theme to refresh React state
