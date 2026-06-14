@@ -856,7 +856,7 @@ function ProjectCard({ project, n, onOpen }) {
         gap: 48,
         alignItems: "center",
         padding: "32px 4px",
-        borderTop: n === 0 ? "1px solid var(--hairline)" : "none",
+        borderTop: "none",
         borderBottom: "1px solid var(--hairline)",
         position: "relative",
       }}
