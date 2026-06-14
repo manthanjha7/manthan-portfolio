@@ -854,7 +854,7 @@ function ProjectCard({ project, n, onOpen }) {
         display: "grid",
         gridTemplateColumns: "minmax(0, 0.95fr) minmax(0, 1.05fr)",
         gap: 48,
-        alignItems: "center",
+        alignItems: "start",
         padding: "32px 4px",
         borderTop: "none",
         borderBottom: "1px solid var(--hairline)",
