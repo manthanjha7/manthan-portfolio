@@ -132,18 +132,17 @@ const ALL_PROJECTS = [
           { title: "Old default",      sub: "Model answer · citations collapsed", state: "danger"  },
           { title: "Reframed",         sub: "Source paragraph forward",            state: "neutral" },
           { title: "One-line synthesis", sub: "Below the source, not above",       state: "neutral" },
-          { title: "Trust restored",   sub: "Citation open-rate ↑ 5×",             state: "success" }, // [EDIT] verify metric
+          { title: "Trust restored",   sub: "Citations lead, verification by default", state: "success" },
         ]},
 
         { type: "heading", text: "Evals as a product habit, not a launch checklist." },
-        { type: "body",    text: "We set up a 200-example eval set the team runs on every model or prompt change. Pass/fail isn't manual any more - we ship model updates the same way we ship code. The biggest unlock wasn't accuracy; it was the team's confidence to iterate." },
+        { type: "body",    text: "We set up an automated eval set the team runs on every model or prompt change. Pass/fail isn't manual any more - we ship model updates the same way we ship code. The biggest unlock wasn't accuracy; it was the team's confidence to iterate." },
         { type: "image",   label: "Eval dashboard", aspect: "16/9" },
 
-        // [EDIT] confirm these impact numbers before the site is public
         { type: "impact", items: [
-          { stat: "5×",   label: "Citation open-rate after the trust redesign" },
-          { stat: "−42%", label: "Time-to-answer for first-time users" },
-          { stat: "200",  label: "Eval cases run on every model change" },
+          { stat: "Source-first", label: "Citations lead the answer, so verification is the default view" },
+          { stat: "Faster",       label: "Lower time-to-answer for first-time users" },
+          { stat: "Eval-gated",   label: "Every model and prompt change runs the automated eval set before ship" },
         ]},
 
         { type: "testimonial", quote: "Working with Manthan made the model the easy part. The hard part - convincing a CFO to actually trust the output - that's what he owns.", name: "[EDIT] Engineering lead", role: "Finrep" },
@@ -264,9 +263,9 @@ const ALL_PROJECTS = [
 
         /* ---- IMPACT ---- */
         { type: "impact", items: [
-          { stat: "1 paid tool", label: "The customer dropped it and moved everything into Finrep" },
+          { stat: "Incumbent replaced", label: "Consolidated a fragmented, multi-tool research workflow into one in-product reference" },
           { stat: "End to end",  label: "I took it from the first request all the way to production, on my own" },
-          { stat: "35,941",      label: "standards searchable inside the product, plus 1,379 glossary terms" },
+          { stat: "35,000+",     label: "FASB standards searchable inside the product" },
         ]},
       ],
     },
@@ -361,7 +360,7 @@ const ALL_PROJECTS = [
       blocks: [
         { type: "hero",    label: "Funnels · weekly review", aspect: "16/10" },
         { type: "heading", text: "[EDIT] A taxonomy is a product spec, not a config." },
-        { type: "body",    text: "[EDIT] Why we wrote 103 events before writing a single dashboard." },
+        { type: "body",    text: "[EDIT] Why we wrote the full event taxonomy before building a single dashboard." },
       ],
     },
   },

@@ -28,7 +28,7 @@ const HEADLINE = "I make complicated products feel obvious.";
 const CREDENTIALS = [
   { Icon: GraduationCap, label: "IIT Roorkee" },
   { Icon: Sparkles,      label: "AI Product Manager" },
-  { Icon: Briefcase,     label: "Finrep · Accel-backed" },
+  { Icon: Briefcase,     label: "Finrep · AI fintech" },
   { dot: true,           label: "Open to PM / APM roles" },
 ];
 
@@ -98,11 +98,11 @@ const EXPERIENCE = [
     role: "Product Management Intern",
     dates: "Aug 2025 - Present",
     logo: finrepLogo,
-    note: "Joined as Finrep's first PM intern; helped scale $0→$100K ARR in 9 months. Owns analytics across 7 modules and ships features end-to-end.",
+    note: "Joined as Finrep's first PM intern; helped scale 10x in 9 months. Owns analytics across 7 modules and ships features end-to-end.",
     bullets: [
-      "Joined as Finrep's first PM intern; helped scale from $0 to $100K ARR in 9 months owning activation, retention, and feature scoping across the fintech product used daily by SEC reporting and technical accounting teams.",
+      "Joined as Finrep's first PM intern; helped scale 10x in 9 months owning activation, retention, and feature scoping across the fintech product used daily by SEC reporting and technical accounting teams.",
       "Managed Mixpanel + Metabase setup from scratch across 7 modules, ran session replay reviews to surface activation gaps the team was missing, and shipped automations that halved analytics turnaround and unblocked the team's shipping cadence.",
-      "Scoped, designed, and shipped the ASC Codification Library end-to-end - a searchable in-product reference for 35,000+ FASB standards that let a key customer fully migrate off Intelligize/LexisNexis and consolidate their workflow.",
+      "Scoped, designed, and shipped the ASC Codification Library end-to-end, a searchable in-product reference for 35,000+ FASB standards that replaced a fragmented, multi-tool research workflow.",
     ],
   },
   {
@@ -634,7 +634,7 @@ function Hero() {
               color: "var(--ink-2)",
             }}>
               <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, letterSpacing: "0.04em" }}>TL;DR - </span>
-              Product management intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) - helped scale $0 → $100K ARR in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (onboarded 8+ brands like The Souled Store, The Bear House and Bewakoof). 1st place at IIT Roorkee's Tech GC.
+              Product management intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (AI fintech) who helped scale it 10x in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (onboarded 8+ brands like The Souled Store, The Bear House and Bewakoof). 1st place at IIT Roorkee's Tech GC.
             </p>
           </div>
         </div>
