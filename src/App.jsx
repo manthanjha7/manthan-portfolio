@@ -28,7 +28,7 @@ const HEADLINE = "I make complicated products feel obvious.";
 const CREDENTIALS = [
   { Icon: GraduationCap, label: "IIT Roorkee" },
   { Icon: Sparkles,      label: "AI Product Manager" },
-  { Icon: Briefcase,     label: "Finrep · AI fintech" },
+  { Icon: Briefcase,     label: "Finrep · Accel-backed" },
   { dot: true,           label: "Open to PM / APM roles" },
 ];
 
@@ -634,7 +634,7 @@ function Hero() {
               color: "var(--ink-2)",
             }}>
               <span className="mono" style={{ color: "var(--ink-3)", fontSize: 12, letterSpacing: "0.04em" }}>TL;DR - </span>
-              Product management intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (AI fintech) who helped scale it 10x in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (onboarded 8+ brands like The Souled Store, The Bear House and Bewakoof). 1st place at IIT Roorkee's Tech GC.
+              Product management intern at <a href="https://finrep.ai" target="_blank" rel="noopener" className="link-grow" style={{ color: "var(--accent)" }}>Finrep</a> (Accel-backed AI fintech) who helped scale it 10x in 9 months. Past Founder's Office at a seed-stage fast-fashion startup (onboarded 8+ brands like The Souled Store, The Bear House and Bewakoof). 1st place at IIT Roorkee's Tech GC.
             </p>
           </div>
         </div>
